@@ -40,6 +40,4 @@ public class JavaFXMLApplication extends Application {
         
     }
 
-
-    
 }
