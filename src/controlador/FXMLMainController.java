@@ -4,12 +4,18 @@
  */
 package controlador;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Menu;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -18,12 +24,6 @@ import javafx.scene.control.Menu;
  */
 public class FXMLMainController implements Initializable {
 
-    @FXML
-    private Menu home;
-    @FXML
-    private Menu register;
-    @FXML
-    private Menu login;
 
     /**
      * Initializes the controller class.
@@ -34,24 +34,66 @@ public class FXMLMainController implements Initializable {
 
     }
 
-    @FXML
     private void presionadoHome(ActionEvent event) {
         // Aqui se debe de cargar la vista de home
         System.out.println("Presionado Home");
     }
 
-    @FXML
     private void persionadoRegister(ActionEvent event) {
         // Aqui se debe de cargar la vista de registro
         // Actualizar ventana y cambiar aFXMLRegistr y a FXMLRegisterController.java
         System.out.println("Presionado Register");
     }
 
-    @FXML
     private void PresionadoLogin(ActionEvent event) {
         // Aqui se debe de cargar la vista de login
         // Actualizar ventana y cambiar aFXMLLogin.fxml y a FXMLLoginController.java
         System.out.println("Presionado Login");
     }
 
+    @FXML
+    private void inicioSesionBotonS(ActionEvent event) {
+        try {
+            // Cargar el archivo FXML de la ventana emergente
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/FXMLLogin.fxml"));
+            Parent root = loader.load();
+
+            // Crear una nueva escena
+            Scene scene = new Scene(root);
+
+            // Crear un nuevo escenario (ventana)
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setTitle("Inicio de Sesión"); // Establecer el título de la ventana
+            stage.initModality(Modality.APPLICATION_MODAL); // Bloquear otras ventanas mientras esta está abierta
+            stage.showAndWait(); // Mostrar la ventana y esperar hasta que se cierre
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+     @FXML
+    private void RegistroBoton(ActionEvent event) {
+        try {
+            // Cargar el archivo FXML de la ventana emergente
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/FXMLRegister.fxml"));
+            Parent root = loader.load();
+
+            // Crear una nueva escena
+            Scene scene = new Scene(root);
+
+            // Crear un nuevo escenario (ventana)
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setTitle("Registro"); // Establecer el título de la ventana
+            stage.initModality(Modality.APPLICATION_MODAL); // Bloquear otras ventanas mientras esta está abierta
+            stage.showAndWait(); // Mostrar la ventana y esperar hasta que se cierre
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
+
+
