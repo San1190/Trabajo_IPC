@@ -1,0 +1,11 @@
+/* Estilos para botones */
+.button {
+    -fx-background-color: #336699;
+    -fx-text-fill: white;
+}
+
+/* Estilos para etiquetas */
+.label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #333333;
+}

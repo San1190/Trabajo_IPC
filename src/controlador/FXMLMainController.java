@@ -31,25 +31,11 @@ public class FXMLMainController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        
 
     }
 
-    private void presionadoHome(ActionEvent event) {
-        // Aqui se debe de cargar la vista de home
-        System.out.println("Presionado Home");
-    }
 
-    private void persionadoRegister(ActionEvent event) {
-        // Aqui se debe de cargar la vista de registro
-        // Actualizar ventana y cambiar aFXMLRegistr y a FXMLRegisterController.java
-        System.out.println("Presionado Register");
-    }
-
-    private void PresionadoLogin(ActionEvent event) {
-        // Aqui se debe de cargar la vista de login
-        // Actualizar ventana y cambiar aFXMLLogin.fxml y a FXMLLoginController.java
-        System.out.println("Presionado Login");
-    }
 
     @FXML
     private void inicioSesionBotonS(ActionEvent event) {
