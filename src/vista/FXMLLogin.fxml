@@ -11,9 +11,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.FXMLLoginController">
+<VBox maxHeight="382.0" maxWidth="321.0" minHeight="382.0" minWidth="321.0" prefHeight="382.0" prefWidth="321.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.FXMLLoginController">
    <children>
-      <GridPane prefHeight="463.0" prefWidth="600.0">
+      <GridPane prefHeight="384.0" prefWidth="600.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -25,15 +25,15 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Inicio de sesión:">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Inicio de sesión:" wrappingWidth="471.7783203125">
                <font>
-                  <Font name="System Bold Italic" size="63.0" />
+                  <Font name="System Bold Italic" size="39.0" />
                </font>
             </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Usuario / Correo" GridPane.rowIndex="1" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Usuario" GridPane.rowIndex="1" />
+            <TextField fx:id="usuario_entrada" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Contraseña" GridPane.rowIndex="2" />
-            <PasswordField GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <PasswordField fx:id="contraseña_entrada" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <Button mnemonicParsing="false" onAction="#presionadoAceptar" text="Aceptar" GridPane.rowIndex="3" />
             <Button mnemonicParsing="false" onAction="#presionadoCancelar" text="Cancelar" GridPane.columnIndex="1" GridPane.rowIndex="3" />
          </children>

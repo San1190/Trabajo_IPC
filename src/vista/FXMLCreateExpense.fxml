@@ -36,12 +36,7 @@
       <TextField prefHeight="179.0" prefWidth="491.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
       <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
          <children>
-            <TextField prefHeight="26.0" prefWidth="445.0">
-               <HBox.margin>
-                  <Insets top="10.0" />
-               </HBox.margin>
-            </TextField>
-            <DatePicker>
+            <DatePicker prefHeight="25.0" prefWidth="118.0">
                <HBox.margin>
                   <Insets top="10.0" />
                </HBox.margin>
@@ -54,6 +49,6 @@
       <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
    </children>
    <padding>
-      <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
    </padding>
 </GridPane>

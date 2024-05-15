@@ -14,6 +14,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Menu;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.RowConstraints;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -23,6 +26,9 @@ import javafx.stage.Stage;
  * @author sanfu
  */
 public class FXMLMainController implements Initializable {
+    
+
+   
 
 
     /**
@@ -31,9 +37,10 @@ public class FXMLMainController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        
+    }    
 
-    }
+     
+
 
 
 
@@ -50,7 +57,7 @@ public class FXMLMainController implements Initializable {
             // Crear un nuevo escenario (ventana)
             Stage stage = new Stage();
             stage.setScene(scene);
-            stage.setTitle("Inicio de Sesión"); // Establecer el título de la ventana
+            stage.setTitle("Registro"); // Establecer el título de la ventana
             stage.initModality(Modality.APPLICATION_MODAL); // Bloquear otras ventanas mientras esta está abierta
             stage.showAndWait(); // Mostrar la ventana y esperar hasta que se cierre
 
