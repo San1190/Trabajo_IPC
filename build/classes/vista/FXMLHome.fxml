@@ -5,17 +5,16 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Text?>
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="726.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.FXMLHomeController">
    <children>
-      <TextField text="Usuario      Imagen" />
-      <TextField prefHeight="97.0" prefWidth="600.0" text="GASTOS DE: USUARIO">
-         <font>
-            <Font name="System Bold Italic" size="39.0" />
-         </font>
-      </TextField>
+      <Text fx:id="nombre_usuario" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" translateX="50.0" translateY="80.0" />
+      <ImageView fx:id="imagen_usuario" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" translateX="200.0" />
+      <Line endX="499.29290771484375" endY="-0.8284515142440796" startX="-100.0" />
       <Button mnemonicParsing="false" text="Añadir Categoría">
          <VBox.margin>
             <Insets left="475.0" />

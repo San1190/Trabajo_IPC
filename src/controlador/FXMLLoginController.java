@@ -1,65 +1,29 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
 package controlador;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import model.Acount;
 import model.AcountDAOException;
-import objetos.alerta;
 
+public class FXMLLoginController {
 
-/**
- * FXML Controller class
- *
- * @author san
- */
-public class FXMLLoginController implements Initializable {
-    private Stage stage;
+    private Stage mainStage;
+
     @FXML
     private TextField usuario_entrada;
     @FXML
     private PasswordField contraseña_entrada;
 
-
-
-
-    @FXML
-    private Parent root;
-
-    /**
-     * Initializes the controller class.
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        //hacer que la ventana sea no redimensionable
-        if (stage == null) {
-            try {
-                stage = (Stage) contraseña_entrada.getScene().getWindow();
-            } catch (Exception e) {
-                System.out.println("Error al intentar obtener la ventana");
-            }
-        }
-        try {
-            stage.setResizable(false);
-        } catch (Exception e) {
-            System.out.println("Error al intentar hacer la ventana no redimensionable");
-        }
-
-        
+    public void setMainStage(Stage mainStage) {
+        this.mainStage = mainStage;
     }
 
     @FXML
@@ -69,36 +33,41 @@ public class FXMLLoginController implements Initializable {
         String contraseña = contraseña_entrada.getText();
 
         if (usuario.isEmpty() || contraseña.isEmpty()) {
-            alerta.mostrarAlerta("Error", "Usuario o contraseña vacios", AlertType.ERROR, null);
+            mostrarAlerta("Error", "Usuario o contraseña vacíos", Alert.AlertType.ERROR);
             return;
         }
-        
+
         Acount account = Acount.getInstance();
 
         if (account.logInUserByCredentials(usuario, contraseña)) {
             // Cambiar la ventana principal a la ventana de home ya logeado :)
-            stage = (Stage) usuario_entrada.getScene().getWindow();
-
-            // Cargar el nuevo archivo FXML
             Parent homeRoot = FXMLLoader.load(getClass().getResource("/vista/FXMLHome.fxml"));
             Scene homeScene = new Scene(homeRoot);
-            
-            // Establecer la nueva escena en el stage
-            stage.setScene(homeScene);
-            stage.show();
 
+            // Establecer la nueva escena en el stage principal
+            mainStage.setScene(homeScene);
+            mainStage.show();
+
+            // Cerrar la ventana de login
+            Stage loginStage = (Stage) usuario_entrada.getScene().getWindow();
+            loginStage.close();
         } else {
-            alerta.mostrarAlerta("Error", "Usuario o contraseña incorrectos", AlertType.ERROR, null);
+            mostrarAlerta("Error", "Usuario o contraseña incorrectos", Alert.AlertType.ERROR);
         }
-    }       
+    }
 
     @FXML
     private void presionadoCancelar(ActionEvent event) {
-        //Volver a la ventana principal y cerrar la ventana de login
-        if (stage == null) {
-            stage = (Stage) usuario_entrada.getScene().getWindow();
-        }
-        stage.close();
+        // Cerrar la ventana de login
+        Stage loginStage = (Stage) usuario_entrada.getScene().getWindow();
+        loginStage.close();
     }
-    
+
+    private void mostrarAlerta(String titulo, String mensaje, Alert.AlertType tipo) {
+        Alert alerta = new Alert(tipo);
+        alerta.setTitle(titulo);
+        alerta.setHeaderText(null);
+        alerta.setContentText(mensaje);
+        alerta.showAndWait();
+    }
 }

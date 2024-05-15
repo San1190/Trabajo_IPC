@@ -105,13 +105,15 @@ public class FXMLRegisterController implements Initializable {
             stage.close();
 
             //crear ventana de registro correcto
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/FXMLCorrectRegister.fxml")); // Por implementar
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/FXMLLogin.fxml")); // Por implementar
             Parent root = loader.load();
             Scene scene = new Scene(root);
             Stage stage = new Stage();
-            stage.initModality(Modality.APPLICATION_MODAL);
             stage.setScene(scene);
+            stage.setTitle("Inicio de sesión");
+            stage.initModality(Modality.APPLICATION_MODAL);
             stage.showAndWait();
+            
             
 
 
