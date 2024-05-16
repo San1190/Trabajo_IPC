@@ -77,52 +77,61 @@ public class FXMLRegisterController implements Initializable {
     }
 
     @FXML
-    private void presionadoAceptar(ActionEvent event) throws AcountDAOException, IOException {
+    private void presionadoAceptar(ActionEvent event) throws IOException {
         String nombre = campoNombre.getText();
         String apellidos = campoApellidos.getText();
         String correo = campoCorreo.getText();
         String usuario = campoUsuario.getText();
-        String contraseña = campoContraseña.getText(); // Letras y numeros, al menos 6 caracteres
+        String contraseña = campoContraseña.getText(); // Letras y números, al menos 6 caracteres
 
-        Acount acount = Acount.getInstance();
+        // Validaciones
+        if (nombre.isEmpty() || apellidos.isEmpty() || correo.isEmpty() || usuario.isEmpty() || contraseña.isEmpty()) {
+            alerta.mostrarAlerta("Error", "Por favor, rellene todos los campos.", AlertType.ERROR, null);
+            return;
+        }
 
-        //comprobar que el nick (usuario) no esta en la base de datos, que el correo tenga el formato correcto y que la contraseña tenga al menos 6 caracteres
-        //si todo esta correcto, se debe de registrar al usuario en la base de datos y abrir la ventana de home
-        //si algo esta mal, se debe de mostrar un mensaje de error
+        if (!correo.matches("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}")) {
+            alerta.mostrarAlerta("Error", "El formato del correo electrónico es incorrecto.", AlertType.ERROR, null);
+            return;
+        }
+
+        if (usuario.contains(" ")) {
+            alerta.mostrarAlerta("Error", "El nombre de usuario no puede contener espacios.", AlertType.ERROR, null);
+            return;
+        }
+
+        if (contraseña.length() < 6 || !contraseña.matches("[a-zA-Z0-9]+")) {
+            alerta.mostrarAlerta("Error", "La contraseña debe contener al menos 6 caracteres alfanuméricos.", AlertType.ERROR, null);
+            return;
+        }
+
+        // Registro de usuario
         
-         
-        // Cerrar la ventana
-
-        boolean isRegistered = acount.registerUser(nombre,apellidos, correo, usuario, contraseña,  UserImage, LocalDate.now());
-        if(isRegistered){
-            System.out.println("Usuario registrado");
-            if(stage == null){
+        try {
+            Acount acount = Acount.getInstance();
+            boolean isRegistered = acount.registerUser(nombre, apellidos, correo, usuario, contraseña, UserImage, LocalDate.now());
+            if (isRegistered) {
+                System.out.println("Usuario registrado");
+            if (stage == null) {
                 stage = (Stage) campoNombre.getScene().getWindow();
             }
 
-            alerta.mostrarAlerta("Registro correcto", "Usuario registrado correctamente", AlertType.INFORMATION, null);
-            
+            alerta.mostrarAlerta("Registro correcto", "Usuario registrado correctamente, ahora inicie sesión", AlertType.INFORMATION, null);
+
             stage.close();
-
-            //crear ventana de registro correcto
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/FXMLLogin.fxml")); // Por implementar
-            Parent root = loader.load();
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            stage.setScene(scene);
-            stage.setTitle("Inicio de sesión");
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.showAndWait();
-            
-            
-
-
-        } else {
-            System.out.println("Usuario no registrado");
-            //crear ventana de registro incorrecto, de error
-            
+            } else {
+                alerta.mostrarAlerta("Error", "Error al registrar al usuario.", AlertType.ERROR, null);
+            }
+        } catch (AcountDAOException e) {
+            alerta.mostrarAlerta("Error", "El nombre de usuario ya está en uso.", AlertType.ERROR, null);
+            return;
         }
+
+
     }
+
+
+
        
 
         
