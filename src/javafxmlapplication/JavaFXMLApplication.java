@@ -24,7 +24,9 @@ public class JavaFXMLApplication extends Application {
         // 2- creación de la escena con el nodo raiz del grafo de escena
         Scene scene = new Scene(root);
         String css = this.getClass().getResource("/estilos/estilos.css").toExternalForm();
+        String botonescss = this.getClass().getResource("/estilos/estilos-botones.css").toExternalForm();
         scene.getStylesheets().add(css);
+        scene.getStylesheets().add(botonescss);
 
         //======================================================================
         // 3- asiganación de la escena al Stage que recibe el metodo 

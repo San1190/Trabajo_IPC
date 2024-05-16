@@ -36,6 +36,11 @@ public class FXMLMainController {
             // Crear un nuevo escenario (ventana)
             Stage stage = new Stage();
             stage.setScene(scene);
+            
+            String css = this.getClass().getResource("/estilos/estilos.css").toExternalForm();
+            String botonescss = this.getClass().getResource("/estilos/estilos-botones.css").toExternalForm();
+            scene.getStylesheets().add(css);
+            scene.getStylesheets().add(botonescss);
             stage.setTitle("Inicio de Sesión"); // Establecer el título de la ventana
             stage.initModality(Modality.APPLICATION_MODAL); // Bloquear otras ventanas mientras esta está abierta
             stage.showAndWait(); // Mostrar la ventana y esperar hasta que se cierre

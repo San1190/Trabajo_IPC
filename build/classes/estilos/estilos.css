@@ -1,29 +1,91 @@
+/* <?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<GridPane id="gridPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.FXMLMainController">
+    <columnConstraints>
+        <ColumnConstraints percentWidth="33.3" />
+        <ColumnConstraints percentWidth="33.3" />
+        <ColumnConstraints percentWidth="33.3" />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    </rowConstraints>
+    <children>
+        <Text id="textoBienvenida" strokeType="OUTSIDE" strokeWidth="0.0" text="Bienvenido a **" wrappingWidth="546.1574096679688" GridPane.columnSpan="3" GridPane.rowIndex="0">
+            <font>
+                <Font name="System Bold Italic" size="52.0" />
+            </font>
+        </Text>
+        <Text id="textodesc" strokeType="OUTSIDE" strokeWidth="0.0" text="DESCRIPCION" GridPane.rowIndex="1" />
+        <Button mnemonicParsing="false" onAction="#inicioSesionBotonS" styleClass="boton" text="Iniciar Sesion" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+        <Button mnemonicParsing="false" onAction="#RegistroBoton" styleClass="boton" text="Registrarse" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="texto" text="Si ya tiene una cuenta inicie sesón:" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="texto" text="Si desea crear una cuenta registrese:" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+    </children>
+</GridPane>
+ */
+
 /* Estilos para botones */
 .boton {
-    -fx-background-color: #2679cc;
-    -fx-text-fill: white;
+    -fx-background-color: #0B8AEE;
+    -fx-text-fill: #fff;
+    -fx-font-size: 20;
+    -fx-font-weight: bold;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-padding: 10 20 10 20;
 }
 
 .boton:hover {
-    -fx-background-color: #2a5674;
+    -fx-background-color: #2e9bed;
 }
-
 .boton:pressed {
-    -fx-background-color: #c1f112;
+    -fx-background-color: #6cb8f2;
 }
 
 
-#panel_inicio {
-    -fx-background-color: #f4f4f4;
-    -fx-padding: 20px;
-    -fx-spacing: 10px;
-    -fx-alignment: center;
-    -fx-font-size: 20px;
-    -fx-font-family: "Arial";
+
+/* Estilos para texto */
+.texto {
+    -fx-font-size: 20;
+    -fx-font-weight: bold;
+    -fx-fill: #fff;
 }
 
-/* Estilos para etiquetas */
-.label {
-    -fx-font-size: 14px;
-    -fx-text-fill: #333333;
+/* Estilos para GridPane */
+#gridPane {
+    -fx-background-color: linear-gradient(to bottom, #0B8AEE, #B6DFFF); /*0B8AEE*/
+    -fx-padding: 20;
+    -fx-hgap: 20;
+    -fx-vgap: 20;
 }
+
+/* Estilos para Text */
+#textoBienvenida {
+    -fx-fill: #fff;
+}
+
+#textodesc {
+    -fx-fill: #fff;
+}
+
+/* Estilos para TextField */
+#textField {
+    -fx-font-size: 20;
+    -fx-font-weight: bold;
+    -fx-background-color: #f0f0f0;
+    -fx-border-color: #fff;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-padding: 10;
+}
+

@@ -7,7 +7,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.FXMLMainController">
+<GridPane id="gridPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.FXMLMainController">
     <columnConstraints>
         <ColumnConstraints percentWidth="33.3" />
         <ColumnConstraints percentWidth="33.3" />
@@ -20,15 +20,15 @@
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
     </rowConstraints>
     <children>
-        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Bienvenido a **" wrappingWidth="546.1574096679688" GridPane.columnSpan="3" GridPane.rowIndex="0">
+        <Text id="textoBienvenida" strokeType="OUTSIDE" strokeWidth="0.0" text="Bienvenido a **" wrappingWidth="546.1574096679688" GridPane.columnSpan="3" GridPane.rowIndex="0">
             <font>
                 <Font name="System Bold Italic" size="52.0" />
             </font>
         </Text>
-        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="DESCRIPCION" GridPane.rowIndex="1" />
+        <Text id="textodesc" strokeType="OUTSIDE" strokeWidth="0.0" text="DESCRIPCION" GridPane.rowIndex="1" />
         <Button mnemonicParsing="false" onAction="#inicioSesionBotonS" styleClass="boton" text="Iniciar Sesion" GridPane.columnIndex="2" GridPane.rowIndex="2" />
         <Button mnemonicParsing="false" onAction="#RegistroBoton" styleClass="boton" text="Registrarse" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Si ya tiene una cuenta inicie sesón:" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Si desea crear una cuenta registrese:" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="texto" text="Si ya tiene una cuenta inicie sesón:" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="texto" text="Si desea crear una cuenta registrese:" GridPane.columnIndex="1" GridPane.rowIndex="3" />
     </children>
 </GridPane>

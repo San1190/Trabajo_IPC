@@ -1,6 +1,9 @@
 package controlador;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,6 +28,9 @@ public class FXMLLoginController {
     public void setMainStage(Stage mainStage) {
         this.mainStage = mainStage;
     }
+
+    
+
 
     @FXML
     private void presionadoAceptar(ActionEvent event) throws IOException, AcountDAOException {
