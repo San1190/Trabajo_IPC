@@ -11,8 +11,12 @@ public class alerta {
         if (header != null) {
             alert.setHeaderText(header);
         }
+        else{
+            alert.setHeaderText(null);
+        }
 
         
+
         alert.setContentText(mensaje);
         alert.showAndWait();
     }
