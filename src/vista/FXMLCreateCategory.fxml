@@ -6,26 +6,36 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane hgap="5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" vgap="5.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21">
+<GridPane hgap="5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" vgap="5.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.FXMLCategoryController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="288.20001220703125" minWidth="10.0" prefWidth="129.79998779296875" />
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="463.39996337890625" minWidth="10.0" prefWidth="456.20001220703125" />
   </columnConstraints>
   <rowConstraints>
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="New Category Name:" GridPane.halignment="RIGHT" />
-      <TextField prefHeight="26.0" prefWidth="206.0" GridPane.columnIndex="1">
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre categoria:" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+      <TextField fx:id="nombre_categoria" prefHeight="26.0" prefWidth="206.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
       </TextField>
-      <Button mnemonicParsing="false" text="Añadir" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-      <Button mnemonicParsing="false" text="Cancelar" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+      <Button mnemonicParsing="false" onAction="#añadir_categoria" text="Añadir" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="3" />
+      <Button mnemonicParsing="false" onAction="#cancelar" text="Cancelar" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Descripción:" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+      <TextField fx:id="descripcion_categoria" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="CREAR CATEGORIA" wrappingWidth="589.8007965087891" GridPane.columnSpan="2">
+         <font>
+            <Font name="System Bold Italic" size="63.0" />
+         </font>
+      </Text>
    </children>
    <padding>
       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

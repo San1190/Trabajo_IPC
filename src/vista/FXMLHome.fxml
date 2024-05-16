@@ -15,7 +15,7 @@
       <Text fx:id="nombre_usuario" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" translateX="50.0" translateY="80.0" />
       <ImageView fx:id="imagen_usuario" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" translateX="200.0" />
       <Line endX="499.29290771484375" endY="-0.8284515142440796" startX="-100.0" />
-      <Button mnemonicParsing="false" text="Añadir Categoría">
+      <Button mnemonicParsing="false" onAction="#añadir_categoria" text="Añadir Categoría">
          <VBox.margin>
             <Insets left="475.0" />
          </VBox.margin>
@@ -28,7 +28,7 @@
                   <VBox prefHeight="200.0" prefWidth="100.0">
                      <children>
                         <ListView prefHeight="225.0" prefWidth="598.0" />
-                        <Button mnemonicParsing="false" text="Añadir Gasto">
+                        <Button mnemonicParsing="false" onAction="#añadir_gasto" text="Añadir Gasto">
                            <VBox.margin>
                               <Insets left="475.0" />
                            </VBox.margin>
