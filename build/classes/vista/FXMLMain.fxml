@@ -1,34 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<GridPane id="gridPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.FXMLMainController">
-    <columnConstraints>
-        <ColumnConstraints percentWidth="33.3" />
-        <ColumnConstraints percentWidth="33.3" />
-        <ColumnConstraints percentWidth="33.3" />
-    </columnConstraints>
-    <rowConstraints>
-        <RowConstraints />
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-    </rowConstraints>
-    <children>
-        <Text id="textoBienvenida" strokeType="OUTSIDE" strokeWidth="0.0" text="Bienvenido a **" wrappingWidth="546.1574096679688" GridPane.columnSpan="3" GridPane.rowIndex="0">
-            <font>
-                <Font name="System Bold Italic" size="52.0" />
-            </font>
-        </Text>
-        <Text id="textodesc" strokeType="OUTSIDE" strokeWidth="0.0" text="DESCRIPCION" GridPane.rowIndex="1" />
-        <Button mnemonicParsing="false" onAction="#inicioSesionBotonS" styleClass="boton" text="Iniciar Sesion" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-        <Button mnemonicParsing="false" onAction="#RegistroBoton" styleClass="boton" text="Registrarse" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="texto" text="Si ya tiene una cuenta inicie sesón:" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="texto" text="Si desea crear una cuenta registrese:" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-    </children>
-</GridPane>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="511.0" prefWidth="818.0" styleClass="main-bg" stylesheets="@../estilos/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.FXMLMainController">
+   <center>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Pane fx:id="panel_central" layoutX="151.0" layoutY="118.0" prefHeight="200.0" prefWidth="200.0" styleClass="inner-bg" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+               <children>
+                  <Label layoutX="32.0" layoutY="36.0" styleClass="laber-header" text="Bienvenido al gestor de Gastos" />
+                  <Separator layoutX="32.0" layoutY="78.0" prefHeight="0.0" prefWidth="420.0" />
+                  <Label layoutX="32.0" layoutY="112.0" />
+                  <Label layoutX="35.0" layoutY="102.0" styleClass="laber-header" text="¿Qué es el gestor de gastos?" />
+                  <Text fx:id="texto_ficheroSeleccionado" layoutX="326.0" layoutY="353.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+                  <Label layoutX="35.0" layoutY="148.0" text="Label" />
+                  <Label layoutX="35.0" layoutY="219.0" styleClass="laber-header" text="¿Cómo funciona?" />
+                  <Label layoutX="35.0" layoutY="261.0" text="Label" />
+               </children>
+            </Pane>
+         </children>
+      </AnchorPane>
+   </center>
+   <left>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox layoutX="57.0" layoutY="114.0" prefHeight="200.0" prefWidth="100.0" styleClass="inner-bg" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0">
+               <children>
+                  <AnchorPane prefHeight="60.0">
+                     <children>
+                        <Button fx:id="boton_registro" layoutX="43.0" layoutY="18.0" mnemonicParsing="false" onAction="#registrarseLabel" styleClass="button-left" text="Registrarse" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="60.0">
+                     <children>
+                        <Button fx:id="boton_iniciar_sesion" layoutX="43.0" layoutY="18.0" mnemonicParsing="false" onAction="#iniciarSesionLabel" styleClass="button-left" text="Iniciar Sesion" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane layoutX="10.0" layoutY="70.0" prefHeight="60.0">
+                     <children>
+                        <Button fx:id="boton_get_gastos" layoutX="43.0" layoutY="18.0" mnemonicParsing="false" onAction="#verGastosLabel" styleClass="button-left" text="Ver Gastos" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+   </left>
+</BorderPane>

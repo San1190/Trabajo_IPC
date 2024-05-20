@@ -1,4 +1,2 @@
-# Visual studio code settings folder
-.vscode/
-
+/build/
 /dist/

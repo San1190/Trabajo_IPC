@@ -72,7 +72,7 @@ public class FXMLCreateExpenseController implements Initializable {
                 categoria_eleccion.getItems().add(categoria.getName());
             }
         }
-       catch (Exception e) {
+        catch (Exception e) {
             alerta.mostrarAlerta("Error", "Error al cargar las categorias", Alert.AlertType.ERROR, null);
         }
         
@@ -205,6 +205,10 @@ public class FXMLCreateExpenseController implements Initializable {
             alerta.mostrarAlerta("Error", "Error al cargar las categorias", Alert.AlertType.ERROR, null);
         }
         return null;
+    }
+
+    public void setStage(Stage window) {
+        this.stage = window;
     }
 }
     

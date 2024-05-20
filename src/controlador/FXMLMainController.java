@@ -1,74 +1,147 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
+ */
 package controlador;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.URL;
+import java.time.LocalDate;
+import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Modality;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import model.Acount;
+import model.AcountDAOException;
+import objetos.alerta;
 
-public class FXMLMainController {
+/**
+ * FXML Controller class
+ *
+ * @author sanfu
+ */
+public class FXMLMainController implements Initializable {
 
-    private Stage primaryStage;
+    @FXML
+    private Pane panel_central;
+    @FXML
+    private Text texto_ficheroSeleccionado;
 
-    public void setPrimaryStage(Stage primaryStage) {
-        this.primaryStage = primaryStage;
+    public static boolean isLogged = false;
+    public static Stage stage;
+
+    @FXML
+    private Button boton_registro;
+    @FXML
+    private Button boton_iniciar_sesion;
+    @FXML
+    private Button boton_get_gastos;
+    
+    /**
+     * Initializes the controller class.
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        // Obtener la instancia de la ventana principal
+    
+    }    
+
+    @FXML
+    private void registrarseLabel(ActionEvent event) throws IOException{
+        // Cargar la vista de registro
+        try {
+            // Cambiar el CSS del botón pulsado
+
+            //quitar el css de los otros botones
+            boton_iniciar_sesion.getStyleClass().remove("button-left-selected");
+            boton_get_gastos.getStyleClass().remove("button-left-selected");
+
+
+            Button button = (Button) event.getSource(); // Obtener el botón que fue pulsado
+            button.getStyleClass().add("button-left-selected");
+             
+            // Cargar el FXML
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/FXMLRegister.fxml"));
+            VBox childView = loader.load();
+
+            // Limpiar el panel central
+            panel_central.getChildren().clear();
+            
+            // Agregar la vista cargada al Pane principal
+            panel_central.getChildren().add(childView);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+    
+    }
+
+    @FXML
+    private void iniciarSesionLabel(ActionEvent event) {
+        // Cargar la vista de inicio de sesión en el panel central
+        // Cambiar el CSS del botón pulsado
+        
+        //quitar el css de los otros botones
+        boton_registro.getStyleClass().remove("button-left-selected");
+        boton_get_gastos.getStyleClass().remove("button-left-selected");
 
         
-    }
-
-    @FXML
-    private void inicioSesionBotonS(ActionEvent event) {
+        Button button = (Button) event.getSource(); // Obtener el botón que fue pulsado
+        button.getStyleClass().add("button-left-selected");
         try {
-            // Cargar el archivo FXML de la ventana emergente
+            // Cargar el FXML
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/FXMLLogin.fxml"));
-            Parent root = loader.load();
+            VBox childView = loader.load();
 
-            // Obtener el controlador del login y pasarle el Stage principal
-            FXMLLoginController loginController = loader.getController();
-            loginController.setMainStage(primaryStage);
-
-            // Crear una nueva escena
-            Scene scene = new Scene(root);
-
-            // Crear un nuevo escenario (ventana)
-            Stage stage = new Stage();
-            stage.setScene(scene);
+            // Limpiar el panel central
+            panel_central.getChildren().clear();
             
-            String css = this.getClass().getResource("/estilos/estilos.css").toExternalForm();
-            String botonescss = this.getClass().getResource("/estilos/estilos-botones.css").toExternalForm();
-            scene.getStylesheets().add(css);
-            scene.getStylesheets().add(botonescss);
-            stage.setTitle("Inicio de Sesión"); // Establecer el título de la ventana
-            stage.initModality(Modality.APPLICATION_MODAL); // Bloquear otras ventanas mientras esta está abierta
-            stage.showAndWait(); // Mostrar la ventana y esperar hasta que se cierre
-
+            // Agregar la vista cargada al Pane principal
+            panel_central.getChildren().add(childView);
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+
     }
 
     @FXML
-    private void RegistroBoton(ActionEvent event) {
-        try {
-            // Cargar el archivo FXML de la ventana emergente
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/FXMLRegister.fxml"));
-            Parent root = loader.load();
+    private void verGastosLabel(ActionEvent event) {
+        //quitar el css de los otros botones
+        boton_registro.getStyleClass().remove("button-left-selected");
+        boton_iniciar_sesion.getStyleClass().remove("button-left-selected");
 
-            // Crear una nueva escena
-            Scene scene = new Scene(root);
+        Button button = (Button) event.getSource(); // Obtener el botón que fue pulsado
+        button.getStyleClass().add("button-left-selected");
+         try {
+            // Cargar el FXML
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/FXMLGastos.fxml"));
+            VBox childView = loader.load();
 
-            // Crear un nuevo escenario (ventana)
-            Stage stage = new Stage();
-            stage.setScene(scene);
-            stage.setTitle("Registro"); // Establecer el título de la ventana
-            stage.initModality(Modality.APPLICATION_MODAL); // Bloquear otras ventanas mientras esta está abierta
-            stage.showAndWait(); // Mostrar la ventana y esperar hasta que se cierre
-
+            // Limpiar el panel central
+            panel_central.getChildren().clear();
+            
+            // Agregar la vista cargada al Pane principal
+            panel_central.getChildren().add(childView);
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+
     }
+
+
+    
 }

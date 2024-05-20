@@ -1,11 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
 package controlador;
 
 import java.net.URL;
-import java.io.IOException;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,16 +9,18 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
+import objetos.alerta;
 import model.Acount;
 import model.AcountDAOException;
-import model.User;
-import objetos.alerta;
+import javafx.scene.control.Alert;
+
 
 /**
  * FXML Controller class
@@ -32,9 +30,16 @@ import objetos.alerta;
 public class FXMLHomeController implements Initializable {
 
     @FXML
-    private Text nombre_usuario;
+    private Button boton_cerrar_sesion;
     @FXML
-    private ImageView imagen_usuario;
+    private Button boton_cuenta;
+    @FXML
+    private Button boton_get_gastos;
+    @FXML
+    private Pane panel_central;
+    @FXML
+    private Text texto_ficheroSeleccionado;
+
 
     /**
      * Initializes the controller class.
@@ -42,63 +47,81 @@ public class FXMLHomeController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        try {
-            Acount account = Acount.getInstance();
-            User user = account.getLoggedUser();
-            nombre_usuario.setText(user.getName());
-            imagen_usuario.setImage(user.getImage());
-        } catch (AcountDAOException ex) {
-            alerta.mostrarAlerta("Error", "Error obteniendo los datos de la base de datos", Alert.AlertType.ERROR, null);
-        } catch (IOException e) {
-            alerta.mostrarAlerta("Error", "Error obteniendo los datos de la base de datos", Alert.AlertType.ERROR, null);
-        }
-      
-
     }    
 
     @FXML
-    private void añadir_gasto(ActionEvent event) {
-        // Abrir la ventana emergente de añadir gasto
+    private void cerrarSesionLabel(ActionEvent event) {
         try {
-            // Cargar el archivo FXML de la ventana emergente
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/FXMLCreateExpense.fxml"));
-            Parent root = loader.load();
+            Acount acount = Acount.getInstance();
+            Alert alert = new Alert(AlertType.CONFIRMATION);
+            alert.setTitle("Cerrar sesión");
+            alert.setHeaderText("¿Está seguro de que desea cerrar la sesión?");
+            
+            ButtonType botonAceptar = new  ButtonType("Aceptar");
+            ButtonType botonCancelar = new  ButtonType("Cancelar", ButtonData.CANCEL_CLOSE);
 
-            // Crear una nueva escena
-            Scene scene = new Scene(root);
+            alert.getButtonTypes().setAll(botonAceptar, botonCancelar);
 
-            // Crear un nuevo escenario (ventana)
-            Stage stage = new Stage();
-            stage.setScene(scene);
-            stage.setTitle("Inicio de Sesión"); // Establecer el título de la ventana
-            stage.initModality(Modality.APPLICATION_MODAL); // Bloquear otras ventanas mientras esta está abierta
-            stage.showAndWait(); // Mostrar la ventana y esperar hasta que se cierre
+            Optional<ButtonType> result = alert.showAndWait();
 
-        } catch (IOException e) {
-            e.printStackTrace();
+            if(result.isPresent() && result.get() == botonCancelar){
+                return;
+            }
+            else if (result.isPresent() && result.get() == botonAceptar) {
+
+                if (acount.logOutUser()) {
+                    
+    
+                    // Cambiar de ventana
+                    Parent homeRoot = FXMLLoader.load(getClass().getResource("/vista/FXMLMain.fxml"));
+                    Scene homeScene = new Scene(homeRoot);
+                    Stage window = (Stage) boton_cerrar_sesion.getScene().getWindow();
+    
+                    //Establecer la nueva ventana
+                    window.setScene(homeScene);
+                    window.show();
+    
+                    FXMLMainController.isLogged = false;
+                    
+                } else {
+                    alerta.mostrarAlerta("Error", "No se ha podido cerrar la sesión", Alert.AlertType.ERROR, null);
+                }
+            }
+            
+
+
+        } catch (AcountDAOException e) {
+            alerta.mostrarAlerta("Error", "No se ha podido cerrar la sesión", Alert.AlertType.ERROR, null);
+        } catch (Exception e) {
+            alerta.mostrarAlerta("Error", "No se ha podido cerrar la sesión", Alert.AlertType.ERROR, null);
         }
-        
+
     }
 
     @FXML
-    private void añadir_categoria(ActionEvent event) {
-        // Cargar la ventana de crear categoria
+    private void verCuentaLabel(ActionEvent event) {
+        // Cambiar el panel central por el panel de la cuenta
         try {
-            // Cargar el archivo FXML de la ventana emergente
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/FXMLCreateCategory.fxml"));
-            Parent root = loader.load();            
-            
-            // Crear la ventana emergente
-            Scene scene = new Scene(root);
-            
-            Stage stage = new Stage();
-            stage.setScene(scene);
-            stage.setTitle("Inicio de Sesión"); // Establecer el título de la ventana
-            stage.initModality(Modality.APPLICATION_MODAL); // Bloquear otras ventanas mientras esta está abierta
-            stage.showAndWait(); // Mostrar la ventana y esperar hasta que se cierre
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/FXMLCuenta.fxml"));
+            Parent root = loader.load();
+            panel_central.getChildren().clear();
+            panel_central.getChildren().add(root);
+        } catch (Exception e) {
+            alerta.mostrarAlerta("Error", "No se ha podido cargar la cuenta", Alert.AlertType.ERROR, null);
+        }
+    }
 
-        } catch (IOException e) {
-            alerta.mostrarAlerta("Error", "Error al cargar la ventana de inicio de sesión", Alert.AlertType.ERROR, null);
+    @FXML
+    private void verGastosLabel(ActionEvent event) {
+        // Cambiar el panel central por el panel de los gastos
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/FXMLVGastos.fxml"));
+            Parent root = loader.load();    
+            panel_central.getChildren().clear();
+            panel_central.getChildren().add(root);
+
+        } catch (Exception e) {
+            alerta.mostrarAlerta("Error", "No se ha podido cargar los gastos", Alert.AlertType.ERROR, null);
         }
     }
     

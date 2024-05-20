@@ -8,81 +8,100 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Acount;
 import model.AcountDAOException;
 import objetos.alerta;
 
-
-
 /**
  * FXML Controller class
  *
- * @author san
+ * @author sanfu
  */
 public class FXMLRegisterController implements Initializable {
 
     @FXML
-    private TextField campoNombre;
+    private Pane panel_central;
     @FXML
-    private TextField campoApellidos;
+    private TextField texto_nombre;
     @FXML
-    private TextField campoCorreo;
+    private TextField texto_apellido;
     @FXML
-    private TextField campoUsuario;
+    private TextField texto_correo;
     @FXML
-    private PasswordField campoContraseña;
+    private TextField texto_usuario;
+    @FXML
+    private PasswordField texto_contraseña;
+    @FXML
+    private Text texto_ficheroSeleccionado;
 
-    private Stage stage;
+    
     private Image UserImage;
-    @FXML
-    private Text nombreImagen;
-
-    @FXML
-    private Parent root;
-
+    private Stage stage;
     /**
      * Initializes the controller class.
      */
-    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }
+    }    
 
     @FXML
-    private void presionadoCancelar(ActionEvent event) {
-        // Cerrar la ventana
-        if(stage == null){
-            stage = (Stage) campoNombre.getScene().getWindow();
+    private void subirFichero(ActionEvent event) {
+        // Abrir el explorador de archivos para que seleccione una imagen el usuario
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Seleccionar imagen");
+        
+        // Filtro para mostrar solo archivos de imagen
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Archivos de imagen", "*.png", "*.jpg", "*.jpeg");
+        fileChooser.getExtensionFilters().add(extFilter);
+        
+        // Mostrar el diálogo y obtener el archivo seleccionado
+        File selectedFile = fileChooser.showOpenDialog(stage);
+        
+        // Si se seleccionó un archivo, puedes utilizarlo
+        if (selectedFile != null) {
+            // Aquí puedes procesar el archivo seleccionado, por ejemplo, cargarlo en un ImageView
+            UserImage = new Image(selectedFile.toURI().toString());
+            texto_ficheroSeleccionado.setText(selectedFile.getName());
         }
-        stage.close();
+    }
+
+
+
+    @FXML
+    private void borrar_todo(ActionEvent event) {
+        // Limpiar los campos de texto
+        texto_nombre.clear();
+        texto_apellido.clear();
+        texto_correo.clear();
+        texto_usuario.clear();
+        texto_contraseña.clear();
+        UserImage = null;
+        texto_ficheroSeleccionado.setText("");
+
     }
 
     @FXML
-    private void presionadoAceptar(ActionEvent event) throws IOException {
-        String nombre = campoNombre.getText();
-        String apellidos = campoApellidos.getText();
-        String correo = campoCorreo.getText();
-        String usuario = campoUsuario.getText();
-        String contraseña = campoContraseña.getText(); // Letras y números, al menos 6 caracteres
+    private void registrarse(ActionEvent event) throws IOException{
+        String nombre = texto_nombre.getText();
+        String apellidos = texto_apellido.getText();
+        String correo = texto_correo.getText();
+        String usuario = texto_usuario.getText();
+        String contraseña = texto_contraseña.getText(); // Letras y números, al menos 6 caracteres
 
         // Validaciones
         if (nombre.isEmpty() || apellidos.isEmpty() || correo.isEmpty() || usuario.isEmpty() || contraseña.isEmpty()) {
@@ -113,10 +132,26 @@ public class FXMLRegisterController implements Initializable {
             if (isRegistered) {
                 System.out.println("Usuario registrado");
             if (stage == null) {
-                stage = (Stage) campoNombre.getScene().getWindow();
+                stage = (Stage) texto_nombre.getScene().getWindow();
             }
 
             alerta.mostrarAlerta("Registro correcto", "Usuario registrado correctamente, ahora inicie sesión", AlertType.INFORMATION, null);
+
+            // abrir la ventana de login            
+            try {
+                // Cargar el FXML
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/FXMLLogin.fxml"));
+                VBox childView = loader.load();
+
+                // Limpiar el panel central
+                panel_central.getChildren().clear();
+
+                // Agregar la vista cargada al Pane principal
+                panel_central.getChildren().add(childView);
+                
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
             stage.close();
             } else {
@@ -127,35 +162,11 @@ public class FXMLRegisterController implements Initializable {
             return;
         }
 
-
     }
 
-
-
-       
-
-        
-
-    
     @FXML
-    private void presionarSeleccionarImagen(ActionEvent event) {
-        // Abrir el explorador de archivos para que seleccione una imagen el usuario
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Seleccionar imagen");
-        
-        // Filtro para mostrar solo archivos de imagen
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Archivos de imagen", "*.png", "*.jpg", "*.jpeg");
-        fileChooser.getExtensionFilters().add(extFilter);
-        
-        // Mostrar el diálogo y obtener el archivo seleccionado
-        File selectedFile = fileChooser.showOpenDialog(stage);
-        
-        // Si se seleccionó un archivo, puedes utilizarlo
-        if (selectedFile != null) {
-            // Aquí puedes procesar el archivo seleccionado, por ejemplo, cargarlo en un ImageView
-            UserImage = new Image(selectedFile.toURI().toString());
-            nombreImagen.setText(selectedFile.getName());
-        }
+    private void registerLabel(ActionEvent event) throws IOException {
+        registrarse(event);
     }
     
 }

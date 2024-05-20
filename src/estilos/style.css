@@ -1,0 +1,106 @@
+.main-bg{
+    -fx-background-image: url(..//images/fondo_app1.jpg);
+
+}
+
+.inner-bg{
+    -fx-background-color: rgba(33, 33, 33, 0.8);
+    -fx-background-radius: 10;
+
+
+}
+
+.label{
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 14;
+
+}
+
+.laber-header{
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 18;
+}
+
+.button-left{
+    -fx-background-color: rgba(0,0,0,0.5);
+    -fx-text-fill: white;
+    -fx-font-size: 14;
+    -fx-cursor: hand;
+    -fx-background-radius: 10;
+
+}
+
+.button-left:hover{
+    -fx-background-color: rgba(255,255,255,0.4);
+    -fx-text-fill: black;
+
+}
+
+.button-left-selected{
+    -fx-background-color: rgba(255,255,255,0.6);
+    -fx-text-fill: black;
+    -fx-background-radius: 10;
+
+}
+
+.button-form{
+    -fx-background-color: rgba(0,255,60,0.4);
+    -fx-text-fill:white;
+    -fx-cursor: hand;
+}
+
+.button-form:hover{
+    -fx-background-color: rgba(166,255,0,0.4);
+}
+
+
+.image {
+    -fx-border-radius: 10;
+}
+
+
+
+/*Tableview*/
+
+.table-view {
+    -fx-background-color: #857F7E;
+    -fx-table-cell-border-color: transparent;
+    -fx-padding: 10;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #555555;
+    -fx-border-color: transparent;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.table-row-cell {
+    -fx-background-color: #aaa6a5;
+    -fx-text-fill: #333333;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #009688;
+    -fx-text-fill: white;
+}
+
+.table-cell {
+    -fx-padding: 8 10 8 10;
+    -fx-border-color: #e0e0e0;
+    -fx-border-width: 0 0 1 0;
+}
+
+.table-row-cell:selected .table-cell {
+    -fx-background-color: #009688;
+    -fx-text-fill: white;
+}
+
+.table-cell:focused {
+    -fx-background-color: #e0f7fa;
+    -fx-border-color: #009688;
+}
