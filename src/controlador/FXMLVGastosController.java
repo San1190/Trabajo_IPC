@@ -118,6 +118,16 @@ public class FXMLVGastosController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        // Bindings botones Gastos
+        boton_modificarG.disableProperty().bind(tablaGastos.getSelectionModel().selectedItemProperty().isNull());
+        boton_eliminarG.disableProperty().bind(tablaGastos.getSelectionModel().selectedItemProperty().isNull());
+        boton_añadirG.disableProperty().bind(tablaGastos.getSelectionModel().selectedItemProperty().isNotNull());
+
+        // Bindings botones Categorías
+        boton_modificarC.disableProperty().bind(tablaCategorias.getSelectionModel().selectedItemProperty().isNull());
+        boton_eliminarC.disableProperty().bind(tablaCategorias.getSelectionModel().selectedItemProperty().isNull());
+        boton_añadirC.disableProperty().bind(tablaCategorias.getSelectionModel().selectedItemProperty().isNotNull());
     }
 
     @FXML
@@ -147,12 +157,56 @@ public class FXMLVGastosController implements Initializable {
 
     @FXML
     private void modificarGasto(ActionEvent event) {
-        // Implementar la lógica de modificación de gastos
+        // Modificar gasto en la db y en la lista
+
+        Charge gastoSeleccionado = tablaGastos.getSelectionModel().getSelectedItem();
+        if (gastoSeleccionado != null) {
+            try {
+                // Cargar el archivo FXML de la ventana emergente
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/FXMLModifyExpense.fxml"));
+                Parent root = loader.load();
+
+                // Obtener el controlador del login y pasarle el Stage principal
+                // FXMLModifyExpenseController controller = loader.getController();
+                //controller.setStage((Stage) panel_central.getScene().getWindow());
+                //controller.setCharge(gastoSeleccionado);
+
+                // Crear una nueva escena
+                Scene scene = new Scene(root);
+                Stage stage = new Stage();
+                stage.setScene(scene);
+
+                stage.setTitle("Modificar gasto"); // Establecer el título de la ventana
+                stage.initModality(Modality.APPLICATION_MODAL); // Bloquear otras ventanas mientras esta está abierta
+                stage.showAndWait(); // Mostrar la ventana y esperar hasta que se cierre
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            mostrarAlerta("Error", "No se ha seleccionado ningún gasto", Alert.AlertType.ERROR, null);
+        }
     }
 
     @FXML
-    private void eliminarGasto(ActionEvent event) {
-        // Implementar la lógica de eliminación de gastos
+    private void eliminarGasto(ActionEvent event) throws IOException {
+        // Si hay un elemento seleccionado eliminarlo de la lista y de la db
+        Charge gastoSeleccionado = tablaGastos.getSelectionModel().getSelectedItem();
+        if (gastoSeleccionado != null) {
+            try {
+                // Eliminar el gasto de la base de datos
+                Acount acount = Acount.getInstance();
+                acount.removeCharge(gastoSeleccionado);
+
+                // Eliminar el gasto de la lista
+                gastos.remove(gastoSeleccionado);
+            } catch (AcountDAOException e) {
+                mostrarAlerta("Error", "No se ha podido eliminar el gasto", Alert.AlertType.ERROR, null);
+            }
+        } else {
+            mostrarAlerta("Error", "No se ha seleccionado ningún gasto", Alert.AlertType.ERROR, null);
+        }
+        
     }
 
     @FXML
@@ -163,15 +217,80 @@ public class FXMLVGastosController implements Initializable {
     @FXML
     private void añadirCategoria(ActionEvent event) {
         // Implementar la lógica para añadir una categoría
+
+        try {
+            // Cargar el archivo FXML de la ventana emergente
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/FXMLCreateCategory.fxml"));
+            Parent root = loader.load();
+
+            // Obtener el controlador del login y pasarle el Stage principal
+            // FXMLCreateCategoryController controller = loader.getController();
+            // controller.setStage((Stage) panel_central.getScene().getWindow());
+
+            // Crear una nueva escena
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+
+            stage.setTitle("Crear categoría"); // Establecer el título de la ventana
+            stage.initModality(Modality.APPLICATION_MODAL); // Bloquear otras ventanas mientras esta está abierta
+            stage.showAndWait(); // Mostrar la ventana y esperar hasta que se cierre
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
-    private void eliminarCategoria(ActionEvent event) {
+    private void eliminarCategoria(ActionEvent event) throws IOException {
         // Implementar la lógica para eliminar una categoría
+        Category categoriaSeleccionada = tablaCategorias.getSelectionModel().getSelectedItem();
+        if (categoriaSeleccionada != null) {
+            try {
+                // Eliminar la categoría de la base de datos
+                Acount acount = Acount.getInstance();
+                acount.removeCategory(categoriaSeleccionada);
+
+                // Eliminar la categoría de la lista
+                categorias.remove(categoriaSeleccionada);
+            } catch (AcountDAOException e) {
+                mostrarAlerta("Error", "No se ha podido eliminar la categoría", Alert.AlertType.ERROR, null);
+            }
+        } else {
+            mostrarAlerta("Error", "No se ha seleccionado ninguna categoría", Alert.AlertType.ERROR, null);
+        }
     }
 
     @FXML
     private void modificarCateogriaC(ActionEvent event) {
         // Implementar la lógica para modificar una categoría
+        Category categoriaSeleccionada = tablaCategorias.getSelectionModel().getSelectedItem();
+
+        if (categoriaSeleccionada != null) {
+            try {
+                // Cargar el archivo FXML de la ventana emergente
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/FXMLModifyCategory.fxml"));
+                Parent root = loader.load();
+
+                // Obtener el controlador del login y pasarle el Stage principal
+                // FXMLModifyCategoryController controller = loader.getController();
+                // controller.setStage((Stage) panel_central.getScene().getWindow());
+                // controller.setCategory(categoriaSeleccionada);
+
+                // Crear una nueva escena
+                Scene scene = new Scene(root);
+                Stage stage = new Stage();
+                stage.setScene(scene);
+
+                stage.setTitle("Modificar categoría"); // Establecer el título de la ventana
+                stage.initModality(Modality.APPLICATION_MODAL); // Bloquear otras ventanas mientras esta está abierta
+                stage.showAndWait(); // Mostrar la ventana y esperar hasta que se cierre
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            mostrarAlerta("Error", "No se ha seleccionado ninguna categoría", Alert.AlertType.ERROR, null);
+        }
     }
 }
