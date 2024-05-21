@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Text?>
+
+<GridPane hgap="5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="fondo-ventana" stylesheets="@../estilos/style.css" vgap="5.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.FXMLModificarExpenseController">
+   <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="100.0" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints maxHeight="55.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="55.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="83.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="83.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="79.0" minHeight="10.0" prefHeight="41.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="255.2000030517578" minHeight="10.0" prefHeight="46.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="220.0" minHeight="10.0" prefHeight="45.19999999999999" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="114.5999755859375" minHeight="0.0" prefHeight="105.19999999999999" vgrow="SOMETIMES" />
+   </rowConstraints>
+   <children>
+      <ChoiceBox fx:id="categoria_eleccion" prefHeight="26.0" prefWidth="106.0" styleClass="combo-box" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <TextField fx:id="texto_nombre" GridPane.columnIndex="1" />
+      <TextField fx:id="texto_coste" prefHeight="26.0" prefWidth="218.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <TextField fx:id="texto_descripcion" prefHeight="39.0" prefWidth="467.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+      <HBox prefHeight="52.0" prefWidth="467.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+         <children>
+            <DatePicker fx:id="texto_fecha" prefHeight="30.0" prefWidth="146.0" styleClass="calendar-menu">
+               <HBox.margin>
+                  <Insets top="10.0" />
+               </HBox.margin>
+            </DatePicker>
+         </children>
+         <GridPane.margin>
+            <Insets bottom="10.0" />
+         </GridPane.margin>
+      </HBox>
+      <Button mnemonicParsing="false" onAction="#seleccionar_archivo" styleClass="button-form" text="Seleccionar Archivo" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+      <Text fx:id="texto_selccionado" strokeType="OUTSIDE" strokeWidth="0.0" translateX="128.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+      <Label text="Nombre: " />
+      <Label text="Categoria: " GridPane.rowIndex="1" />
+      <Label text="Coste:" GridPane.rowIndex="2" />
+      <Label text="Unidades:" GridPane.rowIndex="3" />
+      <Label text="Fecha: " GridPane.rowIndex="4" />
+      <Label text="Descripción: " GridPane.rowIndex="5" />
+      <Label text="Escanear Ticket: " GridPane.rowIndex="6" />
+      <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="30.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
+         <children>
+            <Button fx:id="botonModificar" mnemonicParsing="false" onAction="#modificarGasto" styleClass="boton_aceptar" text="Modificar" />
+            <Button mnemonicParsing="false" onAction="#cancelar_gasto" styleClass="boton_cancelar" text="Cancelar" />
+         </children>
+         <padding>
+            <Insets right="10.0" />
+         </padding>
+      </HBox>
+      <TextField fx:id="texto_unidades" prefHeight="26.0" prefWidth="351.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+   </children>
+   <padding>
+      <Insets bottom="14.0" left="14.0" right="14.0" top="14.0" />
+   </padding>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
+</GridPane>

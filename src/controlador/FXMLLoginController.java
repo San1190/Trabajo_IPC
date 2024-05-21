@@ -14,6 +14,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
@@ -38,13 +39,22 @@ public class FXMLLoginController implements Initializable {
     private Pane panel_central;
     @FXML
     private Text texto_ficheroSeleccionado;
+    @FXML
+    private Button iniciar_sesion_boton;
+    @FXML
+    private Button borrar_boton;
 
 
 
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+
+        usuario_entrada.textProperty().addListener((observable, oldValue, newValue) -> {
+            iniciar_sesion_boton.setDisable(!newValue.trim().isEmpty() && !contraseña_entrada.getText().trim().isEmpty());
+        });
+
+        iniciar_sesion_boton.setDisable(true);
     }    
 
     @FXML

@@ -61,6 +61,12 @@ public class FXMLHomeController implements Initializable {
             ButtonType botonCancelar = new  ButtonType("Cancelar", ButtonData.CANCEL_CLOSE);
 
             alert.getButtonTypes().setAll(botonAceptar, botonCancelar);
+            
+
+
+            alert.getDialogPane().lookupButton(botonAceptar).setId("botonAceptar");
+            alert.getDialogPane().lookupButton(botonCancelar).setId("botonCancelar");
+            alert.getDialogPane().getStylesheets().add("estilos/alertstyles.css");
 
             Optional<ButtonType> result = alert.showAndWait();
 

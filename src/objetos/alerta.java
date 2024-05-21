@@ -18,6 +18,8 @@ public class alerta {
         
 
         alert.setContentText(mensaje);
+        alert.getDialogPane().getStylesheets().add("estilos/alertstyles.css");
+
         alert.showAndWait();
     }
 

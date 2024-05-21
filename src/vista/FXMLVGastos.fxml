@@ -36,7 +36,7 @@
                         <TableColumn fx:id="columnaFechaG" prefWidth="147.0" text="Fecha" />
                     </columns>
                   </TableView>
-                  <GridPane alignment="CENTER" prefWidth="112.0">
+                  <GridPane alignment="CENTER" prefHeight="214.0" prefWidth="128.0">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>
@@ -47,10 +47,10 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Button fx:id="boton_añadirG" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#añadirGasto" styleClass="button-form" text="Añadir" textAlignment="CENTER" />
-                        <Button fx:id="boton_modificarG" mnemonicParsing="false" onAction="#modificarGasto" styleClass="button-form" text="Modificar" GridPane.rowIndex="1" />
-                        <Button fx:id="boton_eliminarG" mnemonicParsing="false" onAction="#eliminarGasto" styleClass="button-form" text="Eliminar" GridPane.rowIndex="2" />
-                        <Button fx:id="boton_fotoG" mnemonicParsing="false" onAction="#verFoto" styleClass="button-form" text="Ver Foto" GridPane.rowIndex="3" />
+                        <Button fx:id="boton_añadirG" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#añadirGasto" styleClass="boton_aceptar" text="Añadir" textAlignment="CENTER" />
+                        <Button fx:id="boton_modificarG" mnemonicParsing="false" onAction="#modificarGasto" styleClass="botton" text="Modificar" GridPane.rowIndex="1" />
+                        <Button fx:id="boton_eliminarG" mnemonicParsing="false" onAction="#eliminarGasto" styleClass="boton_cancelar" text="Eliminar" GridPane.rowIndex="2" />
+                        <Button fx:id="boton_fotoG" mnemonicParsing="false" onAction="#verFoto" styleClass="botton" text="Ver Foto" GridPane.rowIndex="3" />
                      </children>
                      <opaqueInsets>
                         <Insets left="-1.0" />
@@ -82,9 +82,9 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Button fx:id="boton_añadirC" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#añadirCategoria" styleClass="button-form" text="Añadir" textAlignment="CENTER" />
-                        <Button fx:id="boton_eliminarC" mnemonicParsing="false" onAction="#eliminarCategoria" styleClass="button-form" text="Eliminar" GridPane.rowIndex="2" />
-                        <Button fx:id="boton_modificarC" mnemonicParsing="false" onAction="#modificarCateogriaC" styleClass="button-form" text="Modificar" GridPane.rowIndex="1" />
+                        <Button fx:id="boton_añadirC" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#añadirCategoria" styleClass="boton_aceptar" text="Añadir" textAlignment="CENTER" />
+                        <Button fx:id="boton_eliminarC" mnemonicParsing="false" onAction="#eliminarCategoria" styleClass="boton_cancelar" text="Eliminar" GridPane.rowIndex="2" />
+                        <Button fx:id="boton_modificarC" mnemonicParsing="false" onAction="#modificarCateogriaC" styleClass="botton" text="Modificar" GridPane.rowIndex="1" />
                      </children>
                      <padding>
                         <Insets left="16.0" right="-16.0" />
@@ -103,7 +103,7 @@
             <Separator layoutX="36.0" layoutY="379.0" prefHeight="3.0" prefWidth="593.0" />
             <Label layoutX="36.0" layoutY="348.0" styleClass="laber-header" text="Categorias" />
             <Label layoutX="390.0" layoutY="348.0" styleClass="laber-header" text="Vista Gráfica" />
-            <Label layoutX="36.0" layoutY="81.0" styleClass="laber-header" text="Gasrtos" />
+            <Label layoutX="36.0" layoutY="81.0" styleClass="laber-header" text="Gastos" />
          </children>
       </Pane>
    </children>

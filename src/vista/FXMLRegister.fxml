@@ -11,7 +11,7 @@
 
 <VBox maxHeight="494.0" maxWidth="534.0" minHeight="382.0" minWidth="321.0" prefHeight="494.0" prefWidth="534.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.FXMLRegisterController">
    <children>
-      <Pane fx:id="panel_central" prefHeight="391.0" prefWidth="600.0" stylesheets="@../estilos/style.css">
+      <Pane fx:id="panel_central" prefHeight="529.0" prefWidth="534.0" stylesheets="@../estilos/style.css">
          <children>
             <Label layoutX="32.0" layoutY="36.0" styleClass="laber-header" text="Registro" />
             <Separator layoutX="32.0" layoutY="78.0" prefHeight="0.0" prefWidth="420.0" />
@@ -28,8 +28,8 @@
             <PasswordField fx:id="texto_contraseña" layoutX="168.0" layoutY="287.0" onAction="#registerLabel" prefHeight="25.0" prefWidth="264.0" />
             <Button layoutX="182.0" layoutY="336.0" mnemonicParsing="false" onAction="#subirFichero" styleClass="button-form" stylesheets="@../estilos/style.css" text="Seleccionar Archivo" />
             <Text fx:id="texto_ficheroSeleccionado" layoutX="326.0" layoutY="353.0" strokeType="OUTSIDE" strokeWidth="0.0" />
-            <Button layoutX="299.0" layoutY="432.0" mnemonicParsing="false" onAction="#borrar_todo" prefHeight="40.0" prefWidth="100.0" styleClass="button-form" text="Borrar" />
-            <Button layoutX="408.0" layoutY="432.0" mnemonicParsing="false" onAction="#registrarse" prefHeight="40.0" prefWidth="100.0" styleClass="button-form" text="Registrarse" />
+            <Button fx:id="borrar_boton" layoutX="402.0" layoutY="432.0" mnemonicParsing="false" onAction="#borrar_todo" prefHeight="40.0" prefWidth="100.0" styleClass="boton_cancelar" text="Borrar" />
+            <Button fx:id="registrarse_boton" layoutX="299.0" layoutY="432.0" mnemonicParsing="false" onAction="#registrarse" prefHeight="40.0" prefWidth="100.0" styleClass="boton_aceptar" text="Registrarse" />
          </children>
       </Pane>
    </children>

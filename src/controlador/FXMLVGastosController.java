@@ -2,8 +2,13 @@ package controlador;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAdjusters;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.TreeMap;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -14,11 +19,16 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
@@ -73,6 +83,13 @@ public class FXMLVGastosController implements Initializable {
     private ObservableList<Charge> gastos;
     private ObservableList<Category> categorias;
 
+    @FXML
+    private LineChart<String, Number> grafica;
+    @FXML
+    private NumberAxis numeroAxis;
+    @FXML
+    private CategoryAxis categoriaAxis;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
@@ -112,6 +129,10 @@ public class FXMLVGastosController implements Initializable {
             // Configura las columnas de la tabla de categorías
             columnaNombreC.setCellValueFactory(new PropertyValueFactory<>("name"));
             columnaDescripcionC.setCellValueFactory(new PropertyValueFactory<>("description"));
+            
+            mostrarGastoMensual(gastosUser);
+            mostrarGastoPorCategoria(gastosUser);
+            mostrarComparacionAnual(gastosUser);
 
         } catch (AcountDAOException e) {
             mostrarAlerta("Error", "No se han podido cargar los datos", Alert.AlertType.ERROR, null);
@@ -148,6 +169,7 @@ public class FXMLVGastosController implements Initializable {
             stage.setTitle("Crear gasto"); // Establecer el título de la ventana
             stage.initModality(Modality.APPLICATION_MODAL); // Bloquear otras ventanas mientras esta está abierta
             stage.showAndWait(); // Mostrar la ventana y esperar hasta que se cierre
+            initialize(null, null);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -159,16 +181,17 @@ public class FXMLVGastosController implements Initializable {
         // Modificar gasto en la db y en la lista
 
         Charge gastoSeleccionado = tablaGastos.getSelectionModel().getSelectedItem();
+
         if (gastoSeleccionado != null) {
             try {
                 // Cargar el archivo FXML de la ventana emergente
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/FXMLModifyExpense.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/FXMLModificarExpense.fxml"));
                 Parent root = loader.load();
 
                 // Obtener el controlador del login y pasarle el Stage principal
-                // FXMLModifyExpenseController controller = loader.getController();
-                //controller.setStage((Stage) panel_central.getScene().getWindow());
-                //controller.setCharge(gastoSeleccionado);
+                FXMLModificarExpenseController controller = loader.getController();
+                
+                controller.initCharge(gastoSeleccionado);
 
                 // Crear una nueva escena
                 Scene scene = new Scene(root);
@@ -178,6 +201,13 @@ public class FXMLVGastosController implements Initializable {
                 stage.setTitle("Modificar gasto"); // Establecer el título de la ventana
                 stage.initModality(Modality.APPLICATION_MODAL); // Bloquear otras ventanas mientras esta está abierta
                 stage.showAndWait(); // Mostrar la ventana y esperar hasta que se cierre
+                if(controller.isOkpressed()){
+                    int index = tablaGastos.getSelectionModel().getSelectedIndex();
+                    Charge c = controller.getCharge();
+                    gastos.set(index, c);
+                }
+                initialize(null, null);
+
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -199,6 +229,8 @@ public class FXMLVGastosController implements Initializable {
 
                 // Eliminar el gasto de la lista
                 gastos.remove(gastoSeleccionado);
+                initialize(null, null);
+
             } catch (AcountDAOException e) {
                 mostrarAlerta("Error", "No se ha podido eliminar el gasto", Alert.AlertType.ERROR, null);
             }
@@ -208,9 +240,39 @@ public class FXMLVGastosController implements Initializable {
         
     }
 
+    @SuppressWarnings("unused")
     @FXML
     private void verFoto(ActionEvent event) {
         // Implementar la lógica para ver la foto del gasto
+        Charge gastoSeleccionado = tablaGastos.getSelectionModel().getSelectedItem();
+        Image image = gastoSeleccionado.getImageScan();
+
+        if (gastoSeleccionado != null) {
+            try {
+                // Crear una ventana que visualice la foto del gasto
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/FXMLFactura.fxml"));
+                Parent root = loader.load();
+
+                // Obtener el controlador de la ventana y pasarle el gasto seleccionado
+                FXMLFacturaController controller = loader.getController();
+                controller.setImage(image);
+
+                // Crear una nueva escena
+                Scene scene = new Scene(root);
+                Stage stage = new Stage();
+                stage.setScene(scene);
+
+                stage.setTitle("Ver foto"); // Establecer el título de la ventana
+                stage.initModality(Modality.APPLICATION_MODAL); // Bloquear otras ventanas mientras esta está abierta
+                stage.showAndWait(); // Mostrar la ventana y esperar hasta que se cierre
+
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            mostrarAlerta("Error", "No se ha seleccionado ningún gasto", Alert.AlertType.ERROR, null);
+        }
     }
 
     @FXML
@@ -291,5 +353,95 @@ public class FXMLVGastosController implements Initializable {
         } else {
             mostrarAlerta("Error", "No se ha seleccionado ninguna categoría", Alert.AlertType.ERROR, null);
         }
+    }
+
+     private void mostrarGastoMensual(List<Charge> gastosUser) {
+        DateTimeFormatter monthFormatter = DateTimeFormatter.ofPattern("yyyy-MM");
+        Map<String, Double> gastosPorMes = new TreeMap<>();
+
+        for (Charge gasto : gastosUser) {
+            LocalDate fecha = gasto.getDate();
+            String mes = fecha.with(TemporalAdjusters.firstDayOfMonth()).format(monthFormatter);
+            double costo = gasto.getCost();
+            gastosPorMes.put(mes, gastosPorMes.getOrDefault(mes, 0.0) + costo);
+        }
+
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+        series.setName("Gasto Total Mensual");
+
+        for (Map.Entry<String, Double> entry : gastosPorMes.entrySet()) {
+            series.getData().add(new XYChart.Data<>(entry.getKey(), entry.getValue()));
+        }
+
+        grafica.getData().add(series);
+    }
+
+    private void mostrarGastoPorCategoria(List<Charge> gastosUser) {
+        DateTimeFormatter monthFormatter = DateTimeFormatter.ofPattern("yyyy-MM");
+        Map<String, Map<String, Double>> gastosPorCategoriaYMes = new TreeMap<>();
+
+        for (Charge gasto : gastosUser) {
+            LocalDate fecha = gasto.getDate();
+            String mes = fecha.with(TemporalAdjusters.firstDayOfMonth()).format(monthFormatter);
+            String categoria = gasto.getCategory().getName();
+            double costo = gasto.getCost();
+
+            gastosPorCategoriaYMes.putIfAbsent(categoria, new TreeMap<>());
+            Map<String, Double> gastosPorMes = gastosPorCategoriaYMes.get(categoria);
+            gastosPorMes.put(mes, gastosPorMes.getOrDefault(mes, 0.0) + costo);
+        }
+
+        for (Map.Entry<String, Map<String, Double>> entry : gastosPorCategoriaYMes.entrySet()) {
+            String categoria = entry.getKey();
+            Map<String, Double> gastosPorMes = entry.getValue();
+
+            for (Map.Entry<String, Double> mesEntry : gastosPorMes.entrySet()) {
+                String mes = mesEntry.getKey();
+                Double costo = mesEntry.getValue();
+
+                XYChart.Series<String, Number> series = new XYChart.Series<>();
+                series.setName("Categoría: " + categoria + " - Mes: " + mes);
+                series.getData().add(new XYChart.Data<>(mes, costo));
+
+                grafica.getData().add(series);
+            }
+        }
+    }
+
+    private void mostrarComparacionAnual(List<Charge> gastosUser) {
+        DateTimeFormatter monthFormatter = DateTimeFormatter.ofPattern("yyyy-MM");
+        LocalDate now = LocalDate.now();
+        String mesActual = now.format(monthFormatter);
+
+        Map<String, Double> gastosEsteAno = new TreeMap<>();
+        Map<String, Double> gastosAnoAnterior = new TreeMap<>();
+
+        for (Charge gasto : gastosUser) {
+            LocalDate fecha = gasto.getDate();
+            String mes = fecha.with(TemporalAdjusters.firstDayOfMonth()).format(monthFormatter);
+            double costo = gasto.getCost();
+
+            if (fecha.getYear() == now.getYear()) {
+                gastosEsteAno.put(mes, gastosEsteAno.getOrDefault(mes, 0.0) + costo);
+            } else if (fecha.getYear() == now.getYear() - 1) {
+                gastosAnoAnterior.put(mes, gastosAnoAnterior.getOrDefault(mes, 0.0) + costo);
+            }
+        }
+
+        XYChart.Series<String, Number> seriesEsteAno = new XYChart.Series<>();
+        seriesEsteAno.setName("Este Año");
+
+        for (Map.Entry<String, Double> entry : gastosEsteAno.entrySet()) {
+            seriesEsteAno.getData().add(new XYChart.Data<>(entry.getKey(), entry.getValue()));
+        }
+
+        XYChart.Series<String, Number> seriesAnoAnterior = new XYChart.Series<>();
+        seriesAnoAnterior.setName("Año Anterior");
+
+        for (Map.Entry<String, Double> entry : gastosAnoAnterior.entrySet()) {
+            seriesAnoAnterior.getData().add(new XYChart.Data<>(entry.getKey(), entry.getValue()));
+        }
+
+        grafica.getData().addAll(seriesEsteAno, seriesAnoAnterior);
     }
 }

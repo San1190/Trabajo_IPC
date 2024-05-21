@@ -14,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -51,12 +52,25 @@ public class FXMLRegisterController implements Initializable {
     
     private Image UserImage;
     private Stage stage;
+    @FXML
+    private Button borrar_boton;
+    @FXML
+    private Button registrarse_boton;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        
+        registrarse_boton.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!texto_nombre.getText().isEmpty() && !texto_apellido.getText().isEmpty() && !texto_correo.getText().isEmpty() && !texto_usuario.getText().isEmpty() && !texto_contraseña.getText().isEmpty()) {
+                registrarse_boton.setDisable(false);
+            } else {
+                registrarse_boton.setDisable(true);
+            }
+        });
+
+        registrarse_boton.setDisable(true);
     }    
 
     @FXML

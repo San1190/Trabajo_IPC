@@ -20,8 +20,8 @@
             <TextField fx:id="usuario_entrada" layoutX="168.0" layoutY="108.0" prefHeight="25.0" prefWidth="264.0" />
             <PasswordField fx:id="contraseña_entrada" layoutX="168.0" layoutY="225.0" onAction="#iniciarSesionLabel" prefHeight="25.0" prefWidth="264.0" />
             <Text fx:id="texto_ficheroSeleccionado" layoutX="326.0" layoutY="353.0" strokeType="OUTSIDE" strokeWidth="0.0" />
-            <Button layoutX="299.0" layoutY="432.0" mnemonicParsing="false" onAction="#presionadoLimpiar" prefHeight="40.0" prefWidth="100.0" styleClass="button-form" text="Borrar" />
-            <Button layoutX="408.0" layoutY="432.0" mnemonicParsing="false" onAction="#presionadoAceptar" prefHeight="40.0" prefWidth="100.0" styleClass="button-form" text="IniciarSesion" />
+            <Button fx:id="iniciar_sesion_boton" layoutX="292.0" layoutY="432.0" mnemonicParsing="false" onAction="#presionadoAceptar" prefHeight="40.0" prefWidth="100.0" styleClass="boton_aceptar" text="IniciarSesion" />
+            <Button fx:id="borrar_boton" layoutX="402.0" layoutY="432.0" mnemonicParsing="false" onAction="#presionadoLimpiar" prefHeight="40.0" prefWidth="100.0" styleClass="boton_cancelar" text="Borrar" />
          </children>
       </Pane>
    </children>

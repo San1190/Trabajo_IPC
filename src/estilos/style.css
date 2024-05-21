@@ -32,6 +32,7 @@
 
 }
 
+
 .button-left:hover{
     -fx-background-color: rgba(255,255,255,0.4);
     -fx-text-fill: black;
@@ -45,16 +46,45 @@
 
 }
 
-.button-form{
+
+.boton_aceptar{
     -fx-background-color: rgba(0,255,60,0.4);
     -fx-text-fill:white;
     -fx-cursor: hand;
+    -fx-background-radius: 10;
+    -fx-font-size: 14;
 }
 
-.button-form:hover{
-    -fx-background-color: rgba(166,255,0,0.4);
+.boton_aceptar:hover{
+    -fx-background-color: rgba(0,255,60,0.6);
 }
 
+.boton_cancelar{
+    -fx-background-color: rgba(255,0,0,0.4);
+    -fx-text-fill:white;
+    -fx-cursor: hand;
+    -fx-background-radius: 10;
+    -fx-font-size: 14;
+
+}
+.boton_cancelar:hover{
+    -fx-background-color: rgba(255,0,0,0.6);
+
+}
+
+.botton{
+    -fx-background-color: rgba(0, 140, 255, 0.5);
+    -fx-text-fill: white;
+    -fx-font-size: 14;
+    -fx-cursor: hand;
+    -fx-background-radius: 10;
+
+
+}
+.botton:hover{
+    -fx-background-color: rgba(0, 140, 255, 0.8);
+    -fx-text-fill: white;
+}
 
 .image {
     -fx-border-radius: 10;
@@ -103,4 +133,56 @@
 .table-cell:focused {
     -fx-background-color: #e0f7fa;
     -fx-border-color: #009688;
+}
+
+
+
+/*Estilos para las ventanad de gastos y categorias*/
+
+.fondo-ventana{
+    -fx-background-color: rgba(0,0,0,0.5);
+    
+}
+
+
+/*Estilo css para el menu desplegable de el calendario*/
+.calendar-menu{
+
+    -fx-text-fill: white;
+    -fx-font-size: 14;
+    -fx-font-weight: bold;
+}
+
+/*Estilo css para el desplegable de las categorias*/
+/* Estilo para el ComboBox */
+.combo-box {
+    -fx-font-size: 14;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-background-color: rgba(0, 0, 0, 0.5);
+    -fx-background-radius: 10;
+}
+
+/* Estilo para las celdas de la lista */
+.combo-box .list-cell {
+    -fx-background-color: rgba(0, 0, 0, 0.9);
+    -fx-text-fill: white;
+    -fx-font-size: 14;
+    -fx-font-weight: bold;
+}
+
+/* Estilo para el popup del ComboBox */
+.combo-box-popup .list-view {
+    -fx-background-color: rgba(0, 0, 0, 0.9);
+    -fx-text-fill: white;
+    -fx-font-size: 14;
+    -fx-font-weight: bold;
+}
+
+/* Estilo para los ítems de la lista dentro del popup */
+.combo-box-popup .list-view .list-cell {
+    -fx-background-color: rgba(0, 0, 0, 0.9);
+    -fx-text-fill: white;
+    -fx-font-size: 14;
+    -fx-font-weight: bold;
 }

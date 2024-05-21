@@ -43,9 +43,9 @@
                         <Button fx:id="boton_iniciar_sesion" layoutX="43.0" layoutY="18.0" mnemonicParsing="false" onAction="#iniciarSesionLabel" styleClass="button-left" text="Iniciar Sesion" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
                      </children>
                   </AnchorPane>
-                  <AnchorPane layoutX="10.0" layoutY="70.0" prefHeight="60.0">
+                  <AnchorPane prefHeight="60.0">
                      <children>
-                        <Button fx:id="boton_get_gastos" layoutX="43.0" layoutY="18.0" mnemonicParsing="false" onAction="#verGastosLabel" styleClass="button-left" text="Ver Gastos" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
+                        <Button fx:id="boton_salir" layoutX="43.0" layoutY="18.0" mnemonicParsing="false" onAction="#salirLabel" styleClass="button-left" text="Salir" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
                      </children>
                   </AnchorPane>
                </children>

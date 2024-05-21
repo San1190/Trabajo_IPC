@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -11,7 +12,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Text?>
 
-<GridPane hgap="5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../estilos/style.css" vgap="5.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.FXMLCreateExpenseController">
+<GridPane hgap="5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="fondo-ventana" stylesheets="@../estilos/style.css" vgap="5.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.FXMLCreateExpenseController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="100.0" />
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -21,43 +22,53 @@
       <RowConstraints maxHeight="55.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
     <RowConstraints maxHeight="83.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="83.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="79.0" minHeight="10.0" prefHeight="38.20001220703125" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="255.2000030517578" minHeight="10.0" prefHeight="63.400000000000006" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="79.0" minHeight="10.0" prefHeight="41.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="255.2000030517578" minHeight="10.0" prefHeight="46.0" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="220.0" minHeight="10.0" prefHeight="45.19999999999999" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="114.5999755859375" minHeight="0.0" prefHeight="105.19999999999999" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre:" GridPane.halignment="RIGHT" />
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Coste:" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Fecha:" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Descripción:" GridPane.halignment="RIGHT" GridPane.rowIndex="5" />
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Categoría:" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
-      <ChoiceBox fx:id="categoria_eleccion" prefHeight="26.0" prefWidth="106.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-      <Button mnemonicParsing="false" onAction="#añadir_gasto" text="Añadir" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
-      <Button mnemonicParsing="false" onAction="#cancelar_gasto" text="Cancelar" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="7" />
+      <ChoiceBox fx:id="categoria_eleccion" prefHeight="26.0" prefWidth="106.0" styleClass="combo-box" GridPane.columnIndex="1" GridPane.rowIndex="1" />
       <TextField fx:id="texto_nombre" GridPane.columnIndex="1" />
       <TextField fx:id="texto_coste" prefHeight="26.0" prefWidth="218.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-      <TextField fx:id="texto_descripcion" prefHeight="179.0" prefWidth="491.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-      <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+      <TextField fx:id="texto_descripcion" prefHeight="39.0" prefWidth="467.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+      <HBox prefHeight="52.0" prefWidth="467.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
          <children>
-            <DatePicker fx:id="texto_fecha" prefHeight="25.0" prefWidth="118.0">
+            <DatePicker fx:id="texto_fecha" prefHeight="30.0" prefWidth="146.0" styleClass="calendar-menu">
                <HBox.margin>
                   <Insets top="10.0" />
                </HBox.margin>
-               <padding>
-                  <Insets left="5.0" />
-               </padding>
             </DatePicker>
          </children>
+         <GridPane.margin>
+            <Insets bottom="10.0" />
+         </GridPane.margin>
       </HBox>
-      <Button mnemonicParsing="false" onAction="#crear_categoria" text="Crear Categoria" translateX="178.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Escanear Ticket:" GridPane.halignment="RIGHT" GridPane.rowIndex="6" />
-      <Button mnemonicParsing="false" onAction="#seleccionar_archivo" text="Seleccionar Archivo" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+      <Button mnemonicParsing="false" onAction="#crear_categoria" styleClass="botton" text="Crear Categoria" translateX="178.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <Button mnemonicParsing="false" onAction="#seleccionar_archivo" styleClass="button-form" text="Seleccionar Archivo" GridPane.columnIndex="1" GridPane.rowIndex="6" />
       <Text fx:id="texto_selccionado" strokeType="OUTSIDE" strokeWidth="0.0" translateX="128.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Unidades:" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
+      <Label text="Nombre: " />
+      <Label text="Categoria: " GridPane.rowIndex="1" />
+      <Label text="Coste:" GridPane.rowIndex="2" />
+      <Label text="Unidades:" GridPane.rowIndex="3" />
+      <Label text="Fecha: " GridPane.rowIndex="4" />
+      <Label text="Descripción: " GridPane.rowIndex="5" />
+      <Label text="Escanear Ticket: " GridPane.rowIndex="6" />
+      <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="30.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
+         <children>
+            <Button mnemonicParsing="false" onAction="#añadir_gasto" styleClass="boton_aceptar" text="Añadir" />
+            <Button mnemonicParsing="false" onAction="#cancelar_gasto" styleClass="boton_cancelar" text="Cancelar" />
+         </children>
+         <padding>
+            <Insets right="10.0" />
+         </padding>
+      </HBox>
       <TextField fx:id="texto_unidades" prefHeight="26.0" prefWidth="351.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
    </children>
    <padding>
-      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+      <Insets bottom="14.0" left="14.0" right="14.0" top="14.0" />
    </padding>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
 </GridPane>
