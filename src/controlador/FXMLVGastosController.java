@@ -122,13 +122,11 @@ public class FXMLVGastosController implements Initializable {
         // Bindings botones Gastos
         boton_modificarG.disableProperty().bind(tablaGastos.getSelectionModel().selectedItemProperty().isNull());
         boton_eliminarG.disableProperty().bind(tablaGastos.getSelectionModel().selectedItemProperty().isNull());
-        boton_añadirG.disableProperty().bind(tablaGastos.getSelectionModel().selectedItemProperty().isNotNull());
         boton_fotoG.disableProperty().bind(tablaGastos.getSelectionModel().selectedItemProperty().isNull());
 
         // Bindings botones Categorías
         boton_modificarC.disableProperty().bind(tablaCategorias.getSelectionModel().selectedItemProperty().isNull());
         boton_eliminarC.disableProperty().bind(tablaCategorias.getSelectionModel().selectedItemProperty().isNull());
-        boton_añadirC.disableProperty().bind(tablaCategorias.getSelectionModel().selectedItemProperty().isNotNull());
     }
 
     @FXML
