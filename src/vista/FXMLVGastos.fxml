@@ -104,6 +104,7 @@
             <Label layoutX="36.0" layoutY="348.0" styleClass="laber-header" text="Categorias" />
             <Label layoutX="390.0" layoutY="348.0" styleClass="laber-header" text="Vista Gráfica" />
             <Label layoutX="36.0" layoutY="81.0" styleClass="laber-header" text="Gastos" />
+            <Button fx:id="imprimirBoton" layoutX="771.0" layoutY="37.0" mnemonicParsing="false" onAction="#imprimirPDF" styleClass="botton" text="Imprimir PDF" />
          </children>
       </Pane>
    </children>

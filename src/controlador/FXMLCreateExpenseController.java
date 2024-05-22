@@ -95,6 +95,8 @@ public class FXMLCreateExpenseController implements Initializable {
             stage.initModality(Modality.APPLICATION_MODAL); // Bloquear otras ventanas mientras esta está abierta
             stage.showAndWait(); // Mostrar la ventana y esperar hasta que se cierre
 
+            initialize(null, null); // Actualizar la lista de categorías
+
         } catch (IOException e) {
             alerta.mostrarAlerta("Error", "Error al cargar la ventana de inicio de sesión", Alert.AlertType.ERROR, null);
         }

@@ -1,5 +1,7 @@
 package controlador;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
@@ -10,6 +12,10 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.TreeMap;
 
+import javax.swing.text.Document;
+
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -31,6 +37,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Acount;
@@ -89,6 +96,8 @@ public class FXMLVGastosController implements Initializable {
     private NumberAxis numeroAxis;
     @FXML
     private CategoryAxis categoriaAxis;
+    @FXML
+    private Button imprimirBoton;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -143,11 +152,18 @@ public class FXMLVGastosController implements Initializable {
         // Bindings botones Gastos
         boton_modificarG.disableProperty().bind(tablaGastos.getSelectionModel().selectedItemProperty().isNull());
         boton_eliminarG.disableProperty().bind(tablaGastos.getSelectionModel().selectedItemProperty().isNull());
-        boton_fotoG.disableProperty().bind(tablaGastos.getSelectionModel().selectedItemProperty().isNull());
+
+        boton_fotoG.disabledProperty().and(Bindings.createBooleanBinding(() -> {
+            Charge gastoSeleccionado = tablaGastos.getSelectionModel().getSelectedItem();
+            return gastoSeleccionado == null || gastoSeleccionado.getImageScan() == null;
+        }, tablaGastos.getSelectionModel().selectedItemProperty()));
+
 
         // Bindings botones Categorías
         boton_modificarC.disableProperty().bind(tablaCategorias.getSelectionModel().selectedItemProperty().isNull());
         boton_eliminarC.disableProperty().bind(tablaCategorias.getSelectionModel().selectedItemProperty().isNull());
+
+        imprimirBoton.disableProperty().bind(tablaGastos.getSelectionModel().selectedItemProperty().isNull());
     }
 
     @FXML
@@ -285,8 +301,8 @@ public class FXMLVGastosController implements Initializable {
             Parent root = loader.load();
 
             // Obtener el controlador del login y pasarle el Stage principal
-            // FXMLCreateCategoryController controller = loader.getController();
-            // controller.setStage((Stage) panel_central.getScene().getWindow());
+            FXMLCategoryController controller = loader.getController();
+            controller.setStage((Stage) panel_central.getScene().getWindow());
 
             // Crear una nueva escena
             Scene scene = new Scene(root);
@@ -296,6 +312,8 @@ public class FXMLVGastosController implements Initializable {
             stage.setTitle("Crear categoría"); // Establecer el título de la ventana
             stage.initModality(Modality.APPLICATION_MODAL); // Bloquear otras ventanas mientras esta está abierta
             stage.showAndWait(); // Mostrar la ventana y esperar hasta que se cierre
+
+            initialize(null, null);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -314,6 +332,8 @@ public class FXMLVGastosController implements Initializable {
 
                 // Eliminar la categoría de la lista
                 categorias.remove(categoriaSeleccionada);
+
+                initialize(null, null);
             } catch (AcountDAOException e) {
                 mostrarAlerta("Error", "No se ha podido eliminar la categoría", Alert.AlertType.ERROR, null);
             }
@@ -324,34 +344,42 @@ public class FXMLVGastosController implements Initializable {
 
     @FXML
     private void modificarCateogriaC(ActionEvent event) {
-        // Implementar la lógica para modificar una categoría
+        // Modificar gasto en la db y en la lista
+
         Category categoriaSeleccionada = tablaCategorias.getSelectionModel().getSelectedItem();
 
         if (categoriaSeleccionada != null) {
             try {
                 // Cargar el archivo FXML de la ventana emergente
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/FXMLModifyCategory.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/FXMLModificarCategory.fxml"));
                 Parent root = loader.load();
 
                 // Obtener el controlador del login y pasarle el Stage principal
-                // FXMLModifyCategoryController controller = loader.getController();
-                // controller.setStage((Stage) panel_central.getScene().getWindow());
-                // controller.setCategory(categoriaSeleccionada);
+                FXMLModificarCategoryController controller = loader.getController();
+                
+                controller.initCategory(categoriaSeleccionada);
 
                 // Crear una nueva escena
                 Scene scene = new Scene(root);
                 Stage stage = new Stage();
                 stage.setScene(scene);
 
-                stage.setTitle("Modificar categoría"); // Establecer el título de la ventana
+                stage.setTitle("Modificar gasto"); // Establecer el título de la ventana
                 stage.initModality(Modality.APPLICATION_MODAL); // Bloquear otras ventanas mientras esta está abierta
                 stage.showAndWait(); // Mostrar la ventana y esperar hasta que se cierre
+                if(controller.isOkpressed()){
+                    int index = tablaCategorias.getSelectionModel().getSelectedIndex();
+                    Category c = controller.getCategory();
+                    categorias.set(index, c);
+                }
+                initialize(null, null);
+
 
             } catch (IOException e) {
                 e.printStackTrace();
             }
         } else {
-            mostrarAlerta("Error", "No se ha seleccionado ninguna categoría", Alert.AlertType.ERROR, null);
+            mostrarAlerta("Error", "No se ha seleccionado ningún gasto", Alert.AlertType.ERROR, null);
         }
     }
 
@@ -443,5 +471,54 @@ public class FXMLVGastosController implements Initializable {
         }
 
         grafica.getData().addAll(seriesEsteAno, seriesAnoAnterior);
+    }
+
+    @FXML
+private void imprimirPDF(ActionEvent event) {
+    // Obtener el gasto seleccionado
+    Charge selectedGasto = tablaGastos.getSelectionModel().getSelectedItem();
+    if (selectedGasto == null) {
+        // Si no hay ningún gasto seleccionado, salir del método
+        return;
+    }
+
+    // Abrir un diálogo de selección de archivo para elegir la ruta del PDF
+    FileChooser fileChooser = new FileChooser();
+    fileChooser.setTitle("Guardar PDF");
+    fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Archivos PDF", "*.pdf"));
+    File file = fileChooser.showSaveDialog(new Stage());
+    if (file == null) {
+        // Si el usuario cancela la selección, salir del método
+        return;
+    }
+
+    // Generar el PDF con la información del gasto seleccionado
+    try {
+        PDDocument document = new PDDocument();
+        PDPage page = new PDPage();
+        document.addPage(page);
+
+        PDPageContentStream contentStream = new PDPageContentStream(document, page);
+        contentStream.beginText();
+        contentStream.setFont(PDType1Font.HELVETICA, 12);
+        contentStream.newLineAtOffset(100, 700);
+        contentStream.showText("Nombre: " + selectedGasto.getName());
+        contentStream.newLine();
+        contentStream.showText("Descripción: " + selectedGasto.getDescription());
+        contentStream.newLine();
+        contentStream.showText("Categoría: " + selectedGasto.getCategory().getName());
+        contentStream.newLine();
+        contentStream.showText("Coste: " + selectedGasto.getCost());
+        contentStream.newLine();
+        contentStream.showText("Unidades: " + selectedGasto.getUnits());
+        contentStream.newLine();
+        contentStream.showText("Fecha: " + selectedGasto.getDate());
+        contentStream.endText();
+        contentStream.close();
+
+        document.save(file);
+        document.close();
+    } catch (IOException e) {
+        e.printStackTrace();
     }
 }

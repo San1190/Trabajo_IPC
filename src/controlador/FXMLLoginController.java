@@ -51,8 +51,13 @@ public class FXMLLoginController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
 
         usuario_entrada.textProperty().addListener((observable, oldValue, newValue) -> {
-            iniciar_sesion_boton.setDisable(!newValue.trim().isEmpty() && !contraseña_entrada.getText().trim().isEmpty());
+            actualizarEstadoBotonInicioSesion();
         });
+
+        contraseña_entrada.textProperty().addListener((observable, oldValue, newValue) -> {
+            actualizarEstadoBotonInicioSesion();
+        });
+
 
         iniciar_sesion_boton.setDisable(true);
     }    
@@ -105,4 +110,9 @@ public class FXMLLoginController implements Initializable {
         presionadoAceptar(event);
     }
     
+    private void actualizarEstadoBotonInicioSesion() {
+        String usuario = usuario_entrada.getText().trim();
+        String contraseña = contraseña_entrada.getText().trim();
+        iniciar_sesion_boton.setDisable(usuario.isEmpty() || contraseña.isEmpty());
+    }
 }

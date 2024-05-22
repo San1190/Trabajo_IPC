@@ -62,13 +62,26 @@ public class FXMLRegisterController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
-        registrarse_boton.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (!texto_nombre.getText().isEmpty() && !texto_apellido.getText().isEmpty() && !texto_correo.getText().isEmpty() && !texto_usuario.getText().isEmpty() && !texto_contraseña.getText().isEmpty()) {
-                registrarse_boton.setDisable(false);
-            } else {
-                registrarse_boton.setDisable(true);
-            }
+        texto_nombre.textProperty().addListener((observable, oldValue, newValue) -> {
+            actualizarEstadoBotonRegistro();
         });
+
+        texto_apellido.textProperty().addListener((observable, oldValue, newValue) -> {
+            actualizarEstadoBotonRegistro();
+        });
+
+        texto_correo.textProperty().addListener((observable, oldValue, newValue) -> {
+            actualizarEstadoBotonRegistro();
+        });
+
+        texto_usuario.textProperty().addListener((observable, oldValue, newValue) -> {
+            actualizarEstadoBotonRegistro();
+        });
+
+        texto_contraseña.textProperty().addListener((observable, oldValue, newValue) -> {
+            actualizarEstadoBotonRegistro();
+        });
+
 
         registrarse_boton.setDisable(true);
     }    
@@ -167,7 +180,6 @@ public class FXMLRegisterController implements Initializable {
                 e.printStackTrace();
             }
 
-            stage.close();
             } else {
                 alerta.mostrarAlerta("Error", "Error al registrar al usuario.", AlertType.ERROR, null);
             }
@@ -181,6 +193,15 @@ public class FXMLRegisterController implements Initializable {
     @FXML
     private void registerLabel(ActionEvent event) throws IOException {
         registrarse(event);
+    }
+
+    private void actualizarEstadoBotonRegistro() {
+        String nombre = texto_nombre.getText().trim();
+        String apellido = texto_apellido.getText().trim();
+        String correo = texto_correo.getText().trim();
+        String usuario = texto_usuario.getText().trim();
+        String contraseña = texto_contraseña.getText().trim();
+        registrarse_boton.setDisable(nombre.isEmpty() || apellido.isEmpty() || correo.isEmpty() || usuario.isEmpty() || contraseña.isEmpty());
     }
     
 }

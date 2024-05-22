@@ -30,6 +30,8 @@ public class FXMLCategoryController implements Initializable {
 
     private Acount acount;
 
+    private Stage stage;
+
     /**
      * Initializes the controller class.
      */
@@ -79,5 +81,9 @@ public class FXMLCategoryController implements Initializable {
         Stage crateCategoryStage = (Stage) nombre_categoria.getScene().getWindow();
         crateCategoryStage.close();
     }
+
+	public void setStage(Stage window) {
+		this.stage = window;
+	}
     
 }

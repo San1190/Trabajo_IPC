@@ -159,30 +159,15 @@
     -fx-font-size: 14;
     -fx-font-weight: bold;
     -fx-text-fill: white;
-    -fx-background-color: rgba(0, 0, 0, 0.5);
+    -fx-background-color: rgba(0, 208, 255, 0.5);
     -fx-background-radius: 10;
 }
 
-/* Estilo para las celdas de la lista */
-.combo-box .list-cell {
-    -fx-background-color: rgba(0, 0, 0, 0.9);
-    -fx-text-fill: white;
-    -fx-font-size: 14;
-    -fx-font-weight: bold;
-}
 
-/* Estilo para el popup del ComboBox */
-.combo-box-popup .list-view {
-    -fx-background-color: rgba(0, 0, 0, 0.9);
-    -fx-text-fill: white;
-    -fx-font-size: 14;
-    -fx-font-weight: bold;
-}
+/*Estilo paa las celdas desplegables de la lista*/
 
-/* Estilo para los ítems de la lista dentro del popup */
-.combo-box-popup .list-view .list-cell {
-    -fx-background-color: rgba(0, 0, 0, 0.9);
-    -fx-text-fill: white;
+.combo-box .label{
+    -fx-text-fill: rgb(0, 0, 0);
     -fx-font-size: 14;
     -fx-font-weight: bold;
 }
