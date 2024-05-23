@@ -82,6 +82,14 @@ public class FXMLRegisterController implements Initializable {
             actualizarEstadoBotonRegistro();
         });
 
+        //colocar que no se pueden colocar espacion en el usuario
+        texto_usuario.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (texto_usuario.getText().contains(" ")) {
+                //avisar a los usuarios que no se pueden colocar espacios
+                texto_usuario.setText(texto_usuario.getText().replace(" ", ""));
+            }
+        });
+
 
         registrarse_boton.setDisable(true);
     }    

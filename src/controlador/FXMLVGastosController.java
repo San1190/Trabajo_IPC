@@ -474,51 +474,8 @@ public class FXMLVGastosController implements Initializable {
     }
 
     @FXML
-private void imprimirPDF(ActionEvent event) {
-    // Obtener el gasto seleccionado
-    Charge selectedGasto = tablaGastos.getSelectionModel().getSelectedItem();
-    if (selectedGasto == null) {
-        // Si no hay ningún gasto seleccionado, salir del método
-        return;
+    private void imprimirPDF(ActionEvent event) {
     }
 
-    // Abrir un diálogo de selección de archivo para elegir la ruta del PDF
-    FileChooser fileChooser = new FileChooser();
-    fileChooser.setTitle("Guardar PDF");
-    fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Archivos PDF", "*.pdf"));
-    File file = fileChooser.showSaveDialog(new Stage());
-    if (file == null) {
-        // Si el usuario cancela la selección, salir del método
-        return;
-    }
 
-    // Generar el PDF con la información del gasto seleccionado
-    try {
-        PDDocument document = new PDDocument();
-        PDPage page = new PDPage();
-        document.addPage(page);
-
-        PDPageContentStream contentStream = new PDPageContentStream(document, page);
-        contentStream.beginText();
-        contentStream.setFont(PDType1Font.HELVETICA, 12);
-        contentStream.newLineAtOffset(100, 700);
-        contentStream.showText("Nombre: " + selectedGasto.getName());
-        contentStream.newLine();
-        contentStream.showText("Descripción: " + selectedGasto.getDescription());
-        contentStream.newLine();
-        contentStream.showText("Categoría: " + selectedGasto.getCategory().getName());
-        contentStream.newLine();
-        contentStream.showText("Coste: " + selectedGasto.getCost());
-        contentStream.newLine();
-        contentStream.showText("Unidades: " + selectedGasto.getUnits());
-        contentStream.newLine();
-        contentStream.showText("Fecha: " + selectedGasto.getDate());
-        contentStream.endText();
-        contentStream.close();
-
-        document.save(file);
-        document.close();
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
 }
