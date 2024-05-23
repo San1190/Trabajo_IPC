@@ -13,7 +13,6 @@ import java.util.ResourceBundle;
 import java.util.TreeMap;
 
 import javax.swing.text.Document;
-
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.SimpleStringProperty;
@@ -45,6 +44,7 @@ import model.AcountDAOException;
 import model.Category;
 import model.Charge;
 import static objetos.alerta.mostrarAlerta;
+
 
 public class FXMLVGastosController implements Initializable {
 
@@ -107,10 +107,10 @@ public class FXMLVGastosController implements Initializable {
 
             // Obtén los gastos del usuario
             List<Charge> gastosUser = acount.getUserCharges();
-    
+
             // Inicializa la lista de gastos
             gastos = FXCollections.observableArrayList(gastosUser);
-            
+
             // Asigna los datos a la tabla
             tablaGastos.setItems(gastos);
 
@@ -124,21 +124,21 @@ public class FXMLVGastosController implements Initializable {
             columnaCategoríaG.setCellValueFactory(cellData -> {
                 Category category = cellData.getValue().getCategory();
                 return new SimpleStringProperty(category != null ? category.getName() : "Sin categoría");
-            }); 
+            });
 
             // Obtén las categorías del usuario
             List<Category> categoriasUser = acount.getUserCategories();
-    
+
             // Inicializa la lista de categorías
             categorias = FXCollections.observableArrayList(categoriasUser);
-            
+
             // Asigna los datos a la tabla de categorías
             tablaCategorias.setItems(categorias);
 
             // Configura las columnas de la tabla de categorías
             columnaNombreC.setCellValueFactory(new PropertyValueFactory<>("name"));
             columnaDescripcionC.setCellValueFactory(new PropertyValueFactory<>("description"));
-            
+
             mostrarGastoMensual(gastosUser);
             mostrarGastoPorCategoria(gastosUser);
             mostrarComparacionAnual(gastosUser);
@@ -153,11 +153,12 @@ public class FXMLVGastosController implements Initializable {
         boton_modificarG.disableProperty().bind(tablaGastos.getSelectionModel().selectedItemProperty().isNull());
         boton_eliminarG.disableProperty().bind(tablaGastos.getSelectionModel().selectedItemProperty().isNull());
 
-        boton_fotoG.disabledProperty().and(Bindings.createBooleanBinding(() -> {
+        // Comprabarasi en la celda seleccionada hay una imagen
+        boton_fotoG.disableProperty().bind(Bindings.createBooleanBinding(() -> {
             Charge gastoSeleccionado = tablaGastos.getSelectionModel().getSelectedItem();
-            return gastoSeleccionado == null || gastoSeleccionado.getImageScan() == null;
+            boolean imageIsNull = compararBotonFoto(gastoSeleccionado);
+            return imageIsNull;
         }, tablaGastos.getSelectionModel().selectedItemProperty()));
-
 
         // Bindings botones Categorías
         boton_modificarC.disableProperty().bind(tablaCategorias.getSelectionModel().selectedItemProperty().isNull());
@@ -206,7 +207,7 @@ public class FXMLVGastosController implements Initializable {
 
                 // Obtener el controlador del login y pasarle el Stage principal
                 FXMLModificarExpenseController controller = loader.getController();
-                
+
                 controller.initCharge(gastoSeleccionado);
 
                 // Crear una nueva escena
@@ -217,13 +218,12 @@ public class FXMLVGastosController implements Initializable {
                 stage.setTitle("Modificar gasto"); // Establecer el título de la ventana
                 stage.initModality(Modality.APPLICATION_MODAL); // Bloquear otras ventanas mientras esta está abierta
                 stage.showAndWait(); // Mostrar la ventana y esperar hasta que se cierre
-                if(controller.isOkpressed()){
+                if (controller.isOkpressed()) {
                     int index = tablaGastos.getSelectionModel().getSelectedIndex();
                     Charge c = controller.getCharge();
                     gastos.set(index, c);
                 }
                 initialize(null, null);
-
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -253,7 +253,7 @@ public class FXMLVGastosController implements Initializable {
         } else {
             mostrarAlerta("Error", "No se ha seleccionado ningún gasto", Alert.AlertType.ERROR, null);
         }
-        
+
     }
 
     @SuppressWarnings("unused")
@@ -281,7 +281,6 @@ public class FXMLVGastosController implements Initializable {
                 stage.setTitle("Ver foto"); // Establecer el título de la ventana
                 stage.initModality(Modality.APPLICATION_MODAL); // Bloquear otras ventanas mientras esta está abierta
                 stage.showAndWait(); // Mostrar la ventana y esperar hasta que se cierre
-
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -356,7 +355,7 @@ public class FXMLVGastosController implements Initializable {
 
                 // Obtener el controlador del login y pasarle el Stage principal
                 FXMLModificarCategoryController controller = loader.getController();
-                
+
                 controller.initCategory(categoriaSeleccionada);
 
                 // Crear una nueva escena
@@ -367,13 +366,12 @@ public class FXMLVGastosController implements Initializable {
                 stage.setTitle("Modificar gasto"); // Establecer el título de la ventana
                 stage.initModality(Modality.APPLICATION_MODAL); // Bloquear otras ventanas mientras esta está abierta
                 stage.showAndWait(); // Mostrar la ventana y esperar hasta que se cierre
-                if(controller.isOkpressed()){
+                if (controller.isOkpressed()) {
                     int index = tablaCategorias.getSelectionModel().getSelectedIndex();
                     Category c = controller.getCategory();
                     categorias.set(index, c);
                 }
                 initialize(null, null);
-
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -383,7 +381,7 @@ public class FXMLVGastosController implements Initializable {
         }
     }
 
-     private void mostrarGastoMensual(List<Charge> gastosUser) {
+    private void mostrarGastoMensual(List<Charge> gastosUser) {
         DateTimeFormatter monthFormatter = DateTimeFormatter.ofPattern("yyyy-MM");
         Map<String, Double> gastosPorMes = new TreeMap<>();
 
@@ -475,7 +473,75 @@ public class FXMLVGastosController implements Initializable {
 
     @FXML
     private void imprimirPDF(ActionEvent event) {
+        crearPDF();
+    }
+
+    private boolean compararBotonFoto(Charge g) {
+        try {
+            if (g.getImageScan().getWidth() == 0 && g.getImageScan().getHeight() == 0) {
+                return true;
+            } else {
+                return false;
+            }
+
+        } catch (Exception e) {
+
+            return true;
+
+        }
+
     }
 
 
+    //crear pdf con apache pdfbox
+    private void crearPDF() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF", "*.pdf"));
+        File file = fileChooser.showSaveDialog(panel_central.getScene().getWindow());
+
+        if (file != null) {
+            try {
+                org.apache.pdfbox.pdmodel.PDDocument document = new org.apache.pdfbox.pdmodel.PDDocument();
+                org.apache.pdfbox.pdmodel.PDPage page = new org.apache.pdfbox.pdmodel.PDPage();
+                document.addPage(page);
+
+                org.apache.pdfbox.pdmodel.PDPageContentStream contentStream = new org.apache.pdfbox.pdmodel.PDPageContentStream(document, page);
+                contentStream.beginText();
+                contentStream.setFont(org.apache.pdfbox.pdmodel.font.PDType1Font.HELVETICA, 12);
+                contentStream.setLeading(14.5f);
+                contentStream.newLineAtOffset(100, 700);
+
+                contentStream.showText("Gastos");
+                contentStream.newLine();
+                contentStream.newLine();
+
+                for (Charge gasto : gastos) {
+                    contentStream.showText("Nombre: " + gasto.getName());
+                    contentStream.newLine();
+                    contentStream.showText("Descripción: " + gasto.getDescription());
+                    contentStream.newLine();
+                    contentStream.showText("Categoría: " + gasto.getCategory().getName());
+                    contentStream.newLine();
+                    contentStream.showText("Coste: " + gasto.getCost());
+                    contentStream.newLine();
+                    contentStream.showText("Unidades: " + gasto.getUnits());
+                    contentStream.newLine();
+                    contentStream.showText("Fecha: " + gasto.getDate());
+                    contentStream.newLine();
+                    contentStream.newLine();
+                }
+
+                contentStream.endText();
+                contentStream.close();
+
+                document.save(new FileOutputStream(file));
+                document.close();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+
+
+            }
+        }
+    }
 }

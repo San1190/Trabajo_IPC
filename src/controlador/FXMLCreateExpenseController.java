@@ -57,9 +57,9 @@ public class FXMLCreateExpenseController implements Initializable {
     @FXML
     private TextField texto_unidades;
 
-
     private Image expenseImage = null;
     private Stage stage;
+
     /**
      * Initializes the controller class.
      */
@@ -71,12 +71,11 @@ public class FXMLCreateExpenseController implements Initializable {
             for (Category categoria : categorias) {
                 categoria_eleccion.getItems().add(categoria.getName());
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             alerta.mostrarAlerta("Error", "Error al cargar las categorias", Alert.AlertType.ERROR, null);
         }
-        
-    }    
+
+    }
 
     @FXML
     private void crear_categoria(ActionEvent event) {
@@ -84,11 +83,11 @@ public class FXMLCreateExpenseController implements Initializable {
         try {
             // Cargar el archivo FXML de la ventana emergente
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/FXMLCreateCategory.fxml"));
-            Parent root = loader.load();            
-            
+            Parent root = loader.load();
+
             // Crear la ventana emergente
             Scene scene = new Scene(root);
-            
+
             Stage stage = new Stage();
             stage.setScene(scene);
             stage.setTitle("Crear categoría"); // Establecer el título de la ventana
@@ -98,7 +97,8 @@ public class FXMLCreateExpenseController implements Initializable {
             initialize(null, null); // Actualizar la lista de categorías
 
         } catch (IOException e) {
-            alerta.mostrarAlerta("Error", "Error al cargar la ventana de inicio de sesión", Alert.AlertType.ERROR, null);
+            alerta.mostrarAlerta("Error", "Error al cargar la ventana de inicio de sesión", Alert.AlertType.ERROR,
+                    null);
         }
     }
 
@@ -107,17 +107,19 @@ public class FXMLCreateExpenseController implements Initializable {
         // Abrir el explorador de archivos para que seleccione una imagen el usuario
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Seleccionar imagen");
-        
+
         // Filtro para mostrar solo archivos de imagen
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Archivos de imagen", "*.png", "*.jpg", "*.jpeg");
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Archivos de imagen", "*.png", "*.jpg",
+                "*.jpeg");
         fileChooser.getExtensionFilters().add(extFilter);
-        
+
         // Mostrar el diálogo y obtener el archivo seleccionado
         File selectedFile = fileChooser.showOpenDialog(stage);
-        
+
         // Si se seleccionó un archivo, puedes utilizarlo
         if (selectedFile != null) {
-            // Aquí puedes procesar el archivo seleccionado, por ejemplo, cargarlo en un ImageView
+            // Aquí puedes procesar el archivo seleccionado, por ejemplo, cargarlo en un
+            // ImageView
             expenseImage = new Image(selectedFile.toURI().toString());
         }
     }
@@ -171,7 +173,8 @@ public class FXMLCreateExpenseController implements Initializable {
 
             // Registro de gasto
             acount.registerCharge(nombre, descripcion, coste, unidades, expenseImage, fecha, categoriaObjeto);
-            alerta.mostrarAlerta("Gasto añadido", "El gasto ha sido añadido con éxito", Alert.AlertType.INFORMATION, null);
+            alerta.mostrarAlerta("Gasto añadido", "El gasto ha sido añadido con éxito", Alert.AlertType.INFORMATION,
+                    null);
 
             // Cerrar la ventana de ingreso de gasto
             Stage stage = (Stage) categoria_eleccion.getScene().getWindow();
@@ -181,10 +184,10 @@ public class FXMLCreateExpenseController implements Initializable {
             alerta.mostrarAlerta("Error", e.getMessage(), Alert.AlertType.ERROR, null);
         } catch (AcountDAOException e) {
             // Manejo de excepciones DAO
-            alerta.mostrarAlerta("Error", "Error al registrar el gasto: " + e.getMessage(), Alert.AlertType.ERROR, null);
+            alerta.mostrarAlerta("Error", "Error al registrar el gasto: " + e.getMessage(), Alert.AlertType.ERROR,
+                    null);
         }
     }
-
 
     @FXML
     private void cancelar_gasto(ActionEvent event) {
@@ -193,9 +196,8 @@ public class FXMLCreateExpenseController implements Initializable {
         crateExpenseStage.close();
     }
 
-    
     private Category getCategoryByName(String name) {
-        try{
+        try {
 
             List<Category> categorias = acount.getUserCategories();
             for (Category categoria : categorias) {
@@ -213,5 +215,3 @@ public class FXMLCreateExpenseController implements Initializable {
         this.stage = window;
     }
 }
-    
-
