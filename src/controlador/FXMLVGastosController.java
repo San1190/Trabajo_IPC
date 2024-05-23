@@ -3,6 +3,7 @@ package controlador;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.URI;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -44,6 +45,13 @@ import model.AcountDAOException;
 import model.Category;
 import model.Charge;
 import static objetos.alerta.mostrarAlerta;
+
+import org.apache.fontbox.util.autodetect.FontFileFinder;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.font.PDType0Font;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
 
 
 public class FXMLVGastosController implements Initializable {
@@ -507,7 +515,20 @@ public class FXMLVGastosController implements Initializable {
 
                 org.apache.pdfbox.pdmodel.PDPageContentStream contentStream = new org.apache.pdfbox.pdmodel.PDPageContentStream(document, page);
                 contentStream.beginText();
-                contentStream.setFont(org.apache.pdfbox.pdmodel.font.PDType1Font.HELVETICA, 12);
+                FontFileFinder fontFinder = new FontFileFinder();
+                List<URI> fontURIs = fontFinder.find();
+        
+                File fontFile = null;
+        
+                for (URI uri : fontURIs) {
+                    File font = new File(uri);
+                    if (font.getName().equals("CHILLER.TTF")) {
+                        fontFile = font;
+                    }
+                }
+
+                PDType0Font font = PDType0Font.load(document, fontFile);
+                contentStream.setFont(font, 12);
                 contentStream.setLeading(14.5f);
                 contentStream.newLineAtOffset(100, 700);
 
