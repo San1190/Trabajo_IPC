@@ -47,11 +47,9 @@ import model.Charge;
 import static objetos.alerta.mostrarAlerta;
 
 import org.apache.fontbox.util.autodetect.FontFileFinder;
-import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.pdmodel.PDPage;
-import org.apache.pdfbox.pdmodel.PDPageContentStream;
+
 import org.apache.pdfbox.pdmodel.font.PDType0Font;
-import org.apache.pdfbox.pdmodel.font.PDType1Font;
+
 
 
 public class FXMLVGastosController implements Initializable {

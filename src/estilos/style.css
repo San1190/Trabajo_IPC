@@ -148,10 +148,13 @@
 /*Estilo css para el menu desplegable de el calendario*/
 .calendar-menu{
 
-    -fx-text-fill: white;
+    -fx-text-fill: rgb(0, 0, 0);
     -fx-font-size: 14;
     -fx-font-weight: bold;
 }
+
+
+
 
 /*Estilo css para el desplegable de las categorias*/
 /* Estilo para el ComboBox */
@@ -171,3 +174,5 @@
     -fx-font-size: 14;
     -fx-font-weight: bold;
 }
+
+

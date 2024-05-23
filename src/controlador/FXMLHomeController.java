@@ -106,6 +106,11 @@ public class FXMLHomeController implements Initializable {
 
     @FXML
     private void verCuentaLabel(ActionEvent event) {
+        //botones
+        boton_get_gastos.getStyleClass().remove("button-left-selected");
+
+        Button button = (Button) event.getSource(); // Obtener el botón que fue pulsado
+        button.getStyleClass().add("button-left-selected");
         // Cambiar el panel central por el panel de la cuenta
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/FXMLCuenta.fxml"));
@@ -119,6 +124,11 @@ public class FXMLHomeController implements Initializable {
 
     @FXML
     private void verGastosLabel(ActionEvent event) {
+        //dejar los botones de la izquierda sin seleccionar menos el de gastos
+        boton_cuenta.getStyleClass().remove("button-left-selected");
+
+        Button button = (Button) event.getSource(); // Obtener el botón que fue pulsado
+        button.getStyleClass().add("button-left-selected");
         // Cambiar el panel central por el panel de los gastos
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/FXMLVGastos.fxml"));

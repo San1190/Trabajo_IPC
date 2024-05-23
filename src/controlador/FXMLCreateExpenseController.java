@@ -18,6 +18,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -66,11 +67,23 @@ public class FXMLCreateExpenseController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
+            categoria_eleccion.getItems().clear();
             acount = Acount.getInstance();
             List<Category> categorias = acount.getUserCategories();
             for (Category categoria : categorias) {
                 categoria_eleccion.getItems().add(categoria.getName());
             }
+
+            texto_fecha.setDayCellFactory((texto_fecha) -> {
+                return new DateCell() {
+                    @Override
+                    public void updateItem(LocalDate date, boolean empty) {
+                        super.updateItem(date, empty);
+                        LocalDate minDate = LocalDate.of(2020, 1, 1);
+                        setDisable(empty || date.compareTo(minDate) < 0);
+                    }
+                };
+            });
         } catch (Exception e) {
             alerta.mostrarAlerta("Error", "Error al cargar las categorias", Alert.AlertType.ERROR, null);
         }
