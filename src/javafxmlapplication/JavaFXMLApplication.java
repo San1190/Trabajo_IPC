@@ -29,6 +29,8 @@ public class JavaFXMLApplication extends Application {
         //     - se muestra el stage de manera no modal mediante el metodo show()
         stage.setScene(scene);
         stage.setTitle("Gestor De Cuentas");
+        stage.setMinWidth(root.minWidth(-1));
+        stage.setMinHeight(root.minHeight(-1));
         stage.show();
 
     }

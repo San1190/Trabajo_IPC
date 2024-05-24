@@ -4,61 +4,98 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="511.0" prefWidth="818.0" styleClass="main-bg" stylesheets="@../estilos/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.FXMLMainController">
+<BorderPane prefHeight="511.0" prefWidth="818.0" styleClass="main-bg" stylesheets="@../estilos/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.FXMLMainController">
    <center>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <GridPane>
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+         </rowConstraints>
          <children>
-            <Pane fx:id="panel_central" layoutX="151.0" layoutY="118.0" prefHeight="200.0" prefWidth="200.0" styleClass="inner-bg" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+            <Pane fx:id="panel_central" prefHeight="546.0" prefWidth="715.0" styleClass="inner-bg">
                <children>
-                  <Label layoutX="32.0" layoutY="36.0" styleClass="laber-header" text="Bienvenido al gestor de Gastos" />
-                  <Separator layoutX="32.0" layoutY="78.0" prefHeight="0.0" prefWidth="420.0" />
-                  <Label layoutX="32.0" layoutY="112.0" />
-                  <Label layoutX="32.0" layoutY="85.0" styleClass="laber-header" text="¿Qué es el gestor de gastos?" />
-                  <Text fx:id="texto_ficheroSeleccionado" layoutX="326.0" layoutY="353.0" strokeType="OUTSIDE" strokeWidth="0.0" />
-                  <Label layoutX="22.0" layoutY="112.0" prefHeight="207.0" prefWidth="567.0" text="   Es un placer darle la bienvenida a Torges, su aliado de confianza en la &#10;gestión de gastos.&#10;&#10;   En Torges, entendemos que una gestión eficiente de sus gastos es &#10;fundamental para alcanzar sus objetivos financieros y mantener una salud &#10;económica sólida.     &#10;&#10;  Nos enorgullece contar con su confianza y estamos comprometidos a ofrecerle un &#10;servicio excepcional que se adapte a sus necesidades específicas.">
-                     <font>
-                        <Font size="8.0" />
-                     </font></Label>
-                  <Label layoutX="35.0" layoutY="340.0" styleClass="laber-header" text="¿Cómo funciona?" />
-                  <Label layoutX="35.0" layoutY="370.0" prefHeight="109.0" prefWidth="531.0" text="Como su gestor de gastos, mi misión es proporcionarle herramientas y &#10;estrategias personalizadas que le permitan optimizar el uso de sus recursos, &#10;identificar oportunidades de ahorro y asegurar que cada gasto esté alineado &#10;con sus metas financieras. " />
+                  <VBox layoutX="32.0" layoutY="36.0" maxHeight="-Infinity" minHeight="-Infinity">
+                     <children>
+                        <Label styleClass="laber-header" text="Bienvenido al gestor de Gastos" />
+                     </children>
+                  </VBox>
+                  <VBox layoutX="32.0" layoutY="78.0">
+                     <children>
+                        <Separator prefHeight="0.0" prefWidth="420.0" />
+                     </children>
+                  </VBox>
+                  <VBox layoutX="32.0" layoutY="112.0">
+                     <children>
+                        <Label />
+                     </children>
+                  </VBox>
+                  <VBox layoutX="32.0" layoutY="85.0">
+                     <children>
+                        <Label styleClass="laber-header" text="¿Qué es el gestor de gastos?" />
+                     </children>
+                  </VBox>
+                  <VBox layoutX="22.0" layoutY="112.0">
+                     <children>
+                        <Label prefHeight="207.0" prefWidth="567.0" text="   Es un placer darle la bienvenida a Torges, su aliado de confianza en la &#10;gestión de gastos.&#10;&#10;   En Torges, entendemos que una gestión eficiente de sus gastos es &#10;fundamental para alcanzar sus objetivos financieros y mantener una salud &#10;económica sólida.     &#10;&#10;  Nos enorgullece contar con su confianza y estamos comprometidos a ofrecerle un &#10;servicio excepcional que se adapte a sus necesidades específicas.">
+                           <font>
+                              <Font size="8.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox layoutX="35.0" layoutY="340.0">
+                     <children>
+                        <Label styleClass="laber-header" text="¿Cómo funciona?" />
+                     </children>
+                  </VBox>
+                  <VBox layoutX="35.0" layoutY="370.0">
+                     <children>
+                        <Label prefHeight="109.0" prefWidth="531.0" text="Como su gestor de gastos, nuestra misión es proporcionarle herramientas y &#10;estrategias personalizadas que le permitan optimizar el uso de sus recursos, &#10;identificar oportunidades de ahorro y asegurar que cada gasto esté alineado &#10;con sus metas financieras. " />
+                     </children>
+                  </VBox>
                </children>
                <padding>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </padding>
+               <GridPane.margin>
+                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+               </GridPane.margin>
             </Pane>
          </children>
-      </AnchorPane>
+      </GridPane>
    </center>
    <left>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <VBox prefHeight="495.0" prefWidth="118.0" styleClass="inner-bg">
          <children>
-            <VBox layoutX="57.0" layoutY="114.0" prefHeight="200.0" prefWidth="100.0" styleClass="inner-bg" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0">
-               <children>
-                  <AnchorPane prefHeight="60.0">
-                     <children>
-                        <Button fx:id="boton_registro" layoutX="43.0" layoutY="18.0" mnemonicParsing="false" onAction="#registrarseLabel" styleClass="button-left" text="Registrarse" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
-                     </children>
-                  </AnchorPane>
-                  <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="60.0">
-                     <children>
-                        <Button fx:id="boton_iniciar_sesion" layoutX="43.0" layoutY="18.0" mnemonicParsing="false" onAction="#iniciarSesionLabel" styleClass="button-left" text="Iniciar Sesion" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
-                     </children>
-                  </AnchorPane>
-                  <AnchorPane prefHeight="60.0">
-                     <children>
-                        <Button fx:id="boton_salir" layoutX="43.0" layoutY="18.0" mnemonicParsing="false" onAction="#salirLabel" styleClass="button-left" text="Salir" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
-                     </children>
-                  </AnchorPane>
-               </children>
-            </VBox>
+            <Button fx:id="boton_registro" mnemonicParsing="false" onAction="#registrarseLabel" prefHeight="50.0" prefWidth="150.0" styleClass="button-left" text="Registrarse">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="boton_iniciar_sesion" mnemonicParsing="false" onAction="#iniciarSesionLabel" prefHeight="50.0" prefWidth="150.0" styleClass="button-left" text="Iniciar Sesion">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="boton_salir" mnemonicParsing="false" onAction="#salirLabel" prefHeight="50.0" prefWidth="150.0" styleClass="button-left" text="Salir">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+            </Button>
          </children>
-      </AnchorPane>
+         <BorderPane.margin>
+            <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+         </BorderPane.margin>
+      </VBox>
    </left>
 </BorderPane>
