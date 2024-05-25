@@ -7,6 +7,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <BorderPane maxHeight="600.0" maxWidth="900.0" minHeight="400.0" minWidth="700.0" prefHeight="511.0" prefWidth="818.0" styleClass="main-bg" stylesheets="@../estilos/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.FXMLHomeController">
@@ -18,11 +19,19 @@
                   <Label layoutX="32.0" layoutY="36.0" styleClass="laber-header" text="Has iniciado sesión" />
                   <Separator layoutX="32.0" layoutY="78.0" prefHeight="0.0" prefWidth="420.0" />
                   <Label layoutX="32.0" layoutY="112.0" />
-                  <Label layoutX="35.0" layoutY="102.0" styleClass="laber-header" text="Bla bla bla" />
                   <Text fx:id="texto_ficheroSeleccionado" layoutX="326.0" layoutY="353.0" strokeType="OUTSIDE" strokeWidth="0.0" />
-                  <Label layoutX="35.0" layoutY="148.0" text="Label" />
-                  <Label layoutX="35.0" layoutY="219.0" styleClass="laber-header" text="Blablubla" />
-                  <Label layoutX="35.0" layoutY="261.0" text="Label" />
+                  <Label layoutX="16.0" layoutY="81.0" prefHeight="121.0" prefWidth="566.0" text="     Nos complace darle la bienvenida a Torges, su gestor de gastos personal. &#10;Ahora que se ha registrado, podrá acceder a una serie de herramientas y &#10;funcionalidades diseñadas para ayudarle a gestionar sus finanzas de manera eficiente&#10;y efectiva.">
+                     <font>
+                        <Font size="15.0" />
+                     </font></Label>
+                  <Label layoutX="17.0" layoutY="219.0" prefHeight="108.0" prefWidth="575.0" styleClass="laber-header" text="     Estamos comprometidos a ofrecerle un servicio excepcional que &#10;se adapte a sus necesidades específicas. Si tiene alguna pregunta &#10;o necesita asistencia, no dude en ponerse en contacto con nuestro &#10;equipo de soporte.">
+                     <font>
+                        <Font size="15.0" />
+                     </font></Label>
+                  <Label layoutX="32.0" layoutY="356.0" prefHeight="125.0" prefWidth="556.0" text="Gracias por confiar en Torges. &#10;¡Estamos emocionados de acompañarlo en su viaje hacia una mejor gestión &#10;financiera!">
+                     <font>
+                        <Font size="115.0" />
+                     </font></Label>
                </children>
             </Pane>
          </children>

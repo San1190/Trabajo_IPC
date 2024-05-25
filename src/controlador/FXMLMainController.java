@@ -59,7 +59,7 @@ public class FXMLMainController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // Obtener la instancia de la ventana principal
-    
+        
     }    
 
     @FXML
@@ -78,6 +78,7 @@ public class FXMLMainController implements Initializable {
             // Cargar el FXML
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/FXMLRegister.fxml"));
             VBox childView = loader.load();
+            
 
             // Limpiar el panel central
             panel_central.getChildren().clear();

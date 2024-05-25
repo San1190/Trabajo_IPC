@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<VBox prefHeight="651.0" prefWidth="895.0" stylesheets="@../estilos/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.FXMLVGastosController">
+<VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="651.0" prefWidth="895.0" stylesheets="@../estilos/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.FXMLVGastosController">
    <children>
       <Pane fx:id="panel_central" prefHeight="633.0" prefWidth="667.0">
          <children>

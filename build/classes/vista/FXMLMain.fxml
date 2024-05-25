@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="511.0" prefWidth="818.0" styleClass="main-bg" stylesheets="@../estilos/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.FXMLMainController">
+<BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="511.0" prefWidth="818.0" styleClass="main-bg" stylesheets="@../estilos/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.FXMLMainController">
    <center>
       <GridPane>
          <columnConstraints>
@@ -26,7 +26,7 @@
                <children>
                   <VBox layoutX="32.0" layoutY="36.0" maxHeight="-Infinity" minHeight="-Infinity">
                      <children>
-                        <Label styleClass="laber-header" text="Bienvenido al gestor de Gastos" />
+                        <Label styleClass="laber-header" text="Bienvenido al gestor de Gasto Torges" />
                      </children>
                   </VBox>
                   <VBox layoutX="32.0" layoutY="78.0">
@@ -60,7 +60,7 @@
                   </VBox>
                   <VBox layoutX="35.0" layoutY="370.0">
                      <children>
-                        <Label prefHeight="109.0" prefWidth="531.0" text="Como su gestor de gastos, nuestra misión es proporcionarle herramientas y &#10;estrategias personalizadas que le permitan optimizar el uso de sus recursos, &#10;identificar oportunidades de ahorro y asegurar que cada gasto esté alineado &#10;con sus metas financieras. " />
+                        <Label prefHeight="109.0" prefWidth="531.0" text=" Como su gestor de gastos, nuestra misión es proporcionarle herramientas y &#10;estrategias personalizadas que le permitan optimizar el uso de sus recursos, &#10;identificar oportunidades de ahorro y asegurar que cada gasto esté alineado &#10;con sus metas financieras. " />
                      </children>
                   </VBox>
                </children>
