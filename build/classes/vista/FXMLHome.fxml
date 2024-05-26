@@ -20,15 +20,15 @@
                   <Separator layoutX="32.0" layoutY="78.0" prefHeight="0.0" prefWidth="420.0" />
                   <Label layoutX="32.0" layoutY="112.0" />
                   <Text fx:id="texto_ficheroSeleccionado" layoutX="326.0" layoutY="353.0" strokeType="OUTSIDE" strokeWidth="0.0" />
-                  <Label layoutX="16.0" layoutY="81.0" prefHeight="121.0" prefWidth="566.0" text="     Nos complace darle la bienvenida a Torges, su gestor de gastos personal. &#10;Ahora que se ha registrado, podrá acceder a una serie de herramientas y &#10;funcionalidades diseñadas para ayudarle a gestionar sus finanzas de manera eficiente&#10;y efectiva.">
+                  <Label layoutX="29.0" layoutY="81.0" prefHeight="121.0" prefWidth="553.0" text="Nos complace darle la bienvenida a Torges, su gestor de gastos personal. &#10;Ahora que se ha registrado, podrá acceder a una serie de herramientas y &#10;funcionalidades diseñadas para ayudarle a gestionar sus finanzas de manera eficiente&#10;y efectiva.">
+                     <font>
+                        <Font size="16.0" />
+                     </font></Label>
+                  <Label layoutX="32.0" layoutY="232.0" prefHeight="108.0" prefWidth="567.0" text="Estamos comprometidos a ofrecerle un servicio excepcional que &#10;se adapte a sus necesidades específicas. Si tiene alguna pregunta &#10;o necesita asistencia, no dude en ponerse en contacto con nuestro &#10;equipo de soporte.">
                      <font>
                         <Font size="15.0" />
                      </font></Label>
-                  <Label layoutX="17.0" layoutY="219.0" prefHeight="108.0" prefWidth="575.0" styleClass="laber-header" text="     Estamos comprometidos a ofrecerle un servicio excepcional que &#10;se adapte a sus necesidades específicas. Si tiene alguna pregunta &#10;o necesita asistencia, no dude en ponerse en contacto con nuestro &#10;equipo de soporte.">
-                     <font>
-                        <Font size="15.0" />
-                     </font></Label>
-                  <Label layoutX="32.0" layoutY="356.0" prefHeight="125.0" prefWidth="556.0" text="Gracias por confiar en Torges. &#10;¡Estamos emocionados de acompañarlo en su viaje hacia una mejor gestión &#10;financiera!">
+                  <Label layoutX="28.0" layoutY="356.0" prefHeight="125.0" prefWidth="556.0" text="Gracias por confiar en Torges. &#10;¡Estamos emocionados de acompañarlo en su viaje hacia una mejor gestión &#10;financiera!">
                      <font>
                         <Font size="115.0" />
                      </font></Label>
@@ -40,7 +40,7 @@
    <left>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <VBox layoutX="57.0" layoutY="114.0" prefHeight="200.0" prefWidth="100.0" styleClass="inner-bg" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0">
+            <VBox layoutX="57.0" layoutY="114.0" prefHeight="491.0" prefWidth="188.0" styleClass="inner-bg" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="10.0">
                <children>
                   <AnchorPane prefHeight="60.0">
                      <children>
