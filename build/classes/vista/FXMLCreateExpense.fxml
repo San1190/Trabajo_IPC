@@ -31,10 +31,10 @@
       <ChoiceBox fx:id="categoria_eleccion" prefHeight="26.0" prefWidth="106.0" styleClass="combo-box" GridPane.columnIndex="1" GridPane.rowIndex="1" />
       <TextField fx:id="texto_nombre" GridPane.columnIndex="1" />
       <TextField fx:id="texto_coste" prefHeight="26.0" prefWidth="218.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-      <TextField fx:id="texto_descripcion" prefHeight="39.0" prefWidth="467.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+      <TextField fx:id="texto_descripcion" onAction="#labeldescp" prefHeight="39.0" prefWidth="467.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
       <HBox prefHeight="52.0" prefWidth="467.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
          <children>
-            <DatePicker fx:id="texto_fecha" prefHeight="30.0" prefWidth="146.0" styleClass="calendar-menu">
+            <DatePicker fx:id="texto_fecha" editable="false" prefHeight="30.0" prefWidth="146.0" styleClass="calendar-menu">
                <HBox.margin>
                   <Insets top="10.0" />
                </HBox.margin>

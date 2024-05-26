@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
@@ -12,54 +12,58 @@
 
 <BorderPane maxHeight="600.0" maxWidth="900.0" minHeight="400.0" minWidth="700.0" prefHeight="511.0" prefWidth="818.0" styleClass="main-bg" stylesheets="@../estilos/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.FXMLHomeController">
    <center>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <Pane fx:id="panel_central" prefHeight="200.0" prefWidth="200.0" styleClass="inner-bg">
          <children>
-            <Pane fx:id="panel_central" layoutX="151.0" layoutY="118.0" prefHeight="200.0" prefWidth="200.0" styleClass="inner-bg" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
-               <children>
-                  <Label layoutX="32.0" layoutY="36.0" styleClass="laber-header" text="Has iniciado sesión" />
-                  <Separator layoutX="32.0" layoutY="78.0" prefHeight="0.0" prefWidth="420.0" />
-                  <Label layoutX="32.0" layoutY="112.0" />
-                  <Text fx:id="texto_ficheroSeleccionado" layoutX="326.0" layoutY="353.0" strokeType="OUTSIDE" strokeWidth="0.0" />
-                  <Label layoutX="29.0" layoutY="81.0" prefHeight="121.0" prefWidth="553.0" text="Nos complace darle la bienvenida a Torges, su gestor de gastos personal. &#10;Ahora que se ha registrado, podrá acceder a una serie de herramientas y &#10;funcionalidades diseñadas para ayudarle a gestionar sus finanzas de manera eficiente&#10;y efectiva.">
-                     <font>
-                        <Font size="16.0" />
-                     </font></Label>
-                  <Label layoutX="32.0" layoutY="232.0" prefHeight="108.0" prefWidth="567.0" text="Estamos comprometidos a ofrecerle un servicio excepcional que &#10;se adapte a sus necesidades específicas. Si tiene alguna pregunta &#10;o necesita asistencia, no dude en ponerse en contacto con nuestro &#10;equipo de soporte.">
-                     <font>
-                        <Font size="15.0" />
-                     </font></Label>
-                  <Label layoutX="28.0" layoutY="356.0" prefHeight="125.0" prefWidth="556.0" text="Gracias por confiar en Torges. &#10;¡Estamos emocionados de acompañarlo en su viaje hacia una mejor gestión &#10;financiera!">
-                     <font>
-                        <Font size="115.0" />
-                     </font></Label>
-               </children>
-            </Pane>
+            <Label layoutX="32.0" layoutY="36.0" styleClass="laber-header" text="Has iniciado sesión" />
+            <Separator layoutX="32.0" layoutY="78.0" prefHeight="0.0" prefWidth="420.0" />
+            <Label layoutX="32.0" layoutY="112.0" />
+            <Text fx:id="texto_ficheroSeleccionado" layoutX="326.0" layoutY="353.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+            <Label layoutX="29.0" layoutY="81.0" prefHeight="121.0" prefWidth="553.0" text="Nos complace darle la bienvenida a Torges, su gestor de gastos personal. &#10;Ahora que se ha registrado, podrá acceder a una serie de herramientas y &#10;funcionalidades diseñadas para ayudarle a gestionar sus finanzas de manera &#10;eficiente y efectiva.">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="32.0" layoutY="232.0" prefHeight="108.0" prefWidth="567.0" text="Estamos comprometidos a ofrecerle un servicio excepcional que &#10;se adapte a sus necesidades específicas. Si tiene alguna pregunta &#10;o necesita asistencia, no dude en ponerse en contacto con nuestro &#10;equipo de soporte.">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="28.0" layoutY="356.0" prefHeight="125.0" prefWidth="556.0" text="Gracias por confiar en Torges. &#10;¡Estamos emocionados de acompañarlo en su viaje hacia una mejor gestión &#10;financiera!">
+               <font>
+                  <Font size="115.0" />
+               </font>
+            </Label>
          </children>
-      </AnchorPane>
+         <BorderPane.margin>
+            <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+         </BorderPane.margin>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </Pane>
    </center>
    <left>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <VBox prefHeight="420.0" prefWidth="188.0" styleClass="inner-bg">
          <children>
-            <VBox layoutX="57.0" layoutY="114.0" prefHeight="491.0" prefWidth="188.0" styleClass="inner-bg" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="10.0">
-               <children>
-                  <AnchorPane prefHeight="60.0">
-                     <children>
-                        <Button fx:id="boton_cerrar_sesion" layoutX="43.0" layoutY="18.0" mnemonicParsing="false" onAction="#cerrarSesionLabel" styleClass="button-left" text="Cerrar Sesion" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
-                     </children>
-                  </AnchorPane>
-                  <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="60.0">
-                     <children>
-                        <Button fx:id="boton_cuenta" layoutX="43.0" layoutY="18.0" mnemonicParsing="false" onAction="#verCuentaLabel" styleClass="button-left" text="Cuenta" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
-                     </children>
-                  </AnchorPane>
-                  <AnchorPane layoutX="10.0" layoutY="70.0" prefHeight="60.0">
-                     <children>
-                        <Button fx:id="boton_get_gastos" layoutX="43.0" layoutY="18.0" mnemonicParsing="false" onAction="#verGastosLabel" styleClass="button-left" text="Ver Gastos" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
-                     </children>
-                  </AnchorPane>
-               </children>
-            </VBox>
+            <Button fx:id="boton_cerrar_sesion" mnemonicParsing="false" onAction="#cerrarSesionLabel" prefHeight="50.0" prefWidth="180.0" styleClass="button-left" text="Cerrar Sesion">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="boton_cuenta" mnemonicParsing="false" onAction="#verCuentaLabel" prefHeight="50.0" prefWidth="180.0" styleClass="button-left" text="Cuenta">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="boton_get_gastos" mnemonicParsing="false" onAction="#verGastosLabel" prefHeight="50.0" prefWidth="180.0" styleClass="button-left" text="Ver Gastos">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+            </Button>
          </children>
-      </AnchorPane>
+         <BorderPane.margin>
+            <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+         </BorderPane.margin>
+      </VBox>
    </left>
 </BorderPane>

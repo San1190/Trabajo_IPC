@@ -35,7 +35,7 @@
             <Insets right="9.0" />
          </padding>
       </HBox>
-      <TextField fx:id="descripcion_categoria" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <TextField fx:id="descripcion_categoria" onAction="#categoriaLabel" GridPane.columnIndex="1" GridPane.rowIndex="2" />
       <Label prefHeight="20.0" prefWidth="672.0" text="Crear Categoría" GridPane.columnSpan="2" />
       <Label text="Nombre" GridPane.rowIndex="1" />
       <Label text="Descripción" GridPane.rowIndex="2" />

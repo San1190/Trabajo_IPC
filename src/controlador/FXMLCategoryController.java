@@ -85,5 +85,11 @@ public class FXMLCategoryController implements Initializable {
 	public void setStage(Stage window) {
 		this.stage = window;
 	}
+
+    @FXML
+    private void categoriaLabel(ActionEvent event) {
+        añadir_categoria(event);
+
+    }
     
 }

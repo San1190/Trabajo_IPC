@@ -156,6 +156,9 @@ public class FXMLCreateExpenseController implements Initializable {
                 if (fecha == null) {
                     throw new IllegalArgumentException("Por favor, seleccione una fecha válida.");
                 }
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                fecha.format(formatter);
+
             } catch (DateTimeException e) {
                 throw new IllegalArgumentException("Por favor, seleccione una fecha válida.");
             }
@@ -226,5 +229,10 @@ public class FXMLCreateExpenseController implements Initializable {
 
     public void setStage(Stage window) {
         this.stage = window;
+    }
+
+    @FXML
+    private void labeldescp(ActionEvent event) {
+        añadir_gasto(event);
     }
 }

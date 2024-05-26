@@ -172,5 +172,10 @@ public class FXMLModificarExpenseController implements Initializable {
 
 
     }
+
+    @FXML
+    private void descplabel(ActionEvent event) throws IOException {
+        modificarGasto(event);
+    }
     
 }

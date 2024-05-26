@@ -22,18 +22,18 @@
       <Pane fx:id="panel_central" prefHeight="633.0" prefWidth="667.0">
          <children>
             <Label layoutX="32.0" layoutY="36.0" styleClass="laber-header" text="Gestión de Gastos" />
-            <Separator layoutX="32.0" layoutY="78.0" prefHeight="3.0" prefWidth="593.0" />
+            <Separator layoutX="32.0" layoutY="78.0" prefHeight="3.0" prefWidth="838.0" />
             <Text fx:id="texto_ficheroSeleccionado" layoutX="326.0" layoutY="353.0" strokeType="OUTSIDE" strokeWidth="0.0" />
             <HBox layoutX="36.0" layoutY="125.0">
                <children>
-                  <TableView fx:id="tablaGastos" prefHeight="210.0" prefWidth="686.0">
+                  <TableView fx:id="tablaGastos" prefHeight="214.0" prefWidth="689.0">
                     <columns>
                       <TableColumn fx:id="columnaNombreG" prefWidth="75.0" text="Nombre" />
                       <TableColumn fx:id="columnaDescripcionG" prefWidth="188.0" text="Descripción" />
                         <TableColumn fx:id="columnaCategoríaG" minWidth="0.0" prefWidth="134.0" text="Categoria" />
                         <TableColumn fx:id="columnaCosteG" prefWidth="43.0" text="Coste" />
                         <TableColumn fx:id="columnaUnidadesG" prefWidth="69.0" text="Unidades" />
-                        <TableColumn fx:id="columnaFechaG" prefWidth="147.0" text="Fecha" />
+                        <TableColumn fx:id="columnaFechaG" prefWidth="160.0" text="Fecha" />
                     </columns>
                   </TableView>
                   <GridPane alignment="CENTER" prefHeight="214.0" prefWidth="128.0">
@@ -100,11 +100,10 @@
                   </LineChart>
                </children>
             </HBox>
-            <Separator layoutX="36.0" layoutY="379.0" prefHeight="3.0" prefWidth="593.0" />
+            <Separator layoutX="36.0" layoutY="379.0" prefHeight="3.0" prefWidth="824.0" />
             <Label layoutX="36.0" layoutY="348.0" styleClass="laber-header" text="Categorias" />
-            <Label layoutX="390.0" layoutY="348.0" styleClass="laber-header" text="Vista Gráfica" />
-            <Label layoutX="36.0" layoutY="81.0" styleClass="laber-header" text="Gastos" />
-            <Button fx:id="imprimirBoton" layoutX="771.0" layoutY="37.0" mnemonicParsing="false" onAction="#imprimirPDF" styleClass="botton" text="Imprimir PDF" />
+            <Label layoutX="644.0" layoutY="348.0" styleClass="laber-header" text="Vista Gráfica" />
+            <Button fx:id="imprimirBoton" layoutX="751.0" layoutY="35.0" mnemonicParsing="false" onAction="#imprimirPDF" styleClass="botton" text="Imprimir PDF" />
          </children>
       </Pane>
    </children>

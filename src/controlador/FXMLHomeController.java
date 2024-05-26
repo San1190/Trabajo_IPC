@@ -85,6 +85,8 @@ public class FXMLHomeController implements Initializable {
     
                     //Establecer la nueva ventana
                     window.setScene(homeScene);
+                    window.setHeight(window.getHeight() - 120);
+                    window.setWidth(window.getWidth() - 275);
                     window.show();
     
                     FXMLMainController.isLogged = false;
